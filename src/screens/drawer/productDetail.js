@@ -26,13 +26,11 @@ const ProductDetails = (props) => {
     const [refresh, setRefresh] = useState(false);
     // ------------------------
     const [colors, setcolors] = useState('');
-    const [isClicked, setIsClicked] = useState(false);
     const [colorName, setColorName] = useState('');
     const [colorID, setColorID] = useState('');
 
     // ------------------------
     const [product_Size, setproduct_Size] = useState('');
-    const [isClicked2, setIsClicked2] = useState(false);
     const [size, setsize] = useState('');
     const [size_ID, setsize_ID] = useState('0');
     //------------------------------------
@@ -46,6 +44,8 @@ const ProductDetails = (props) => {
     const [stock_response, setStock_response] = useState('')
     const [visible, setVisible] = useState(true);
     const toast = useToast();
+    const [selectRadio, setSelectRadio] = useState('')
+    const [selectRadio_color, setSelectRadio_color] = useState('')
 
     //    -----------------redux-------------------------
     const randomNumber = useSelector(state => state.randomNumber.randomNumber);
@@ -285,6 +285,9 @@ const ProductDetails = (props) => {
         return () => backHandler.remove();
     }, [navigation]);
 
+    //-------------------------------------------------------------------------------------
+
+
     return (
         // ---------------Top Navbar-----------------
         <SafeAreaView style={{ backgroundColor: '#fff', flex: 1 }}>
@@ -298,209 +301,63 @@ const ProductDetails = (props) => {
             </AnimatedLoader>
 
             {/* ---------------card Details------------- */}
+            <View>
+                <Animatable.View animation={'slideInDown'} style={{
+                    backgroundColor: '#fff',
+
+                    width: responsiveWidth(100),
+                    height: responsiveHeight(60),
+                    alignSelf: 'center',
+                }}>
+                    <Animatable.Image animation={'slideInDown'} style={{ width: responsiveWidth(100), height: responsiveHeight(60), resizeMode: 'contain', alignSelf: 'center' }} source={{ uri: image }} />
+
+                </Animatable.View>
+            </View>
+
+            {/* ---------------------------------------------------------------------------- */}
+
             <ScrollView
+                style={{
+                    width: responsiveWidth(100),
+                    height: responsiveHeight(40),
+                    alignSelf: 'center',
+                    backgroundColor: '#fff',
+                    borderTopLeftRadius: 40,
+                    borderTopRightRadius: 40,
+                    shadowColor: "#000",
+                    shadowOffset: {
+                        width: 0,
+                        height: 2,
+                    },
+                    shadowOpacity: 0.25,
+                    shadowRadius: 3.84,
+                    elevation: 5,
+                }}
                 refreshControl={
                     <RefreshControl
                         refreshing={refresh}
                         onRefresh={() => pullme()} />
                 }>
-                <View style={{ width: responsiveWidth(100), alignSelf: 'center' }}>
 
-                    <View>
-                        <Animatable.View animation={'slideInDown'} style={{
-                            backgroundColor: '#fff',
-                            borderRadius: 60,
-                            shadowColor: "#000",
-                            shadowOffset: {
-                                width: 0,
-                                height: 2,
-                            },
-                            shadowOpacity: 0.25,
-                            shadowRadius: 3.84,
-                            width: responsiveWidth(100),
-                            height: responsiveHeight(40),
-                            elevation: 5,
-                            alignSelf: 'center',
-                            marginTop: 15
-                        }}>
-                            <Animatable.Image animation={'slideInDown'} style={{ width: responsiveWidth(100), height: responsiveHeight(40), resizeMode: 'contain', alignSelf: 'center', borderRadius: 60 }} source={{ uri: image }} />
 
-                        </Animatable.View>
-                        <Animatable.View animation={'slideInUp'} >
+                <View>
 
-                            <View style={{ margin: 10 }}>
-                                <Text style={{ color: 'black', fontSize: responsiveFontSize(3.5), fontWeight: 'bold' }}>{product_name}</Text>
-                            </View>
-                            <View style={{ marginLeft: 10 }}>
+                    <Animatable.View animation={'slideInUp'} >
 
+                        <View style={{ width: responsiveWidth(90), flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', alignSelf: 'center', margin: 8 }}>
+                            <Text style={{ color: 'black', fontSize: responsiveFontSize(3.5), fontWeight: 'bold' }}>{product_name}</Text>
+
+                            <Text style={{ color: '#DD8560', fontSize: responsiveFontSize(3), fontWeight: 'bold', padding: 5 }}>Rs.{!update_price ? price * quantity : update_price * quantity}</Text>
+
+
+                        </View>
+                        <View style={{ width: responsiveWidth(90), flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', alignSelf: 'center' }}>
+                            <View>
                                 <Text style={{ color: 'black', fontSize: responsiveFontSize(2.5), padding: 5 }}>{brand}</Text>
                                 <Text style={{ color: 'black', fontSize: responsiveFontSize(2.5), padding: 5 }}>{plainText}</Text>
 
                             </View>
-
-
-                            {/* -----------size selector--------------------------- */}
-                            {no_Sizedata == 'no data' ? null : (<View>
-
-                                <TouchableOpacity style={style.dropDownSelector} onPress={() => { setIsClicked2(!isClicked2) }}>
-                                    <Text style={{ fontSize: responsiveFontSize(2), color: 'gray' }}>{size == '' ? 'Select size' : size}</Text>
-                                    {isClicked2 ? <Icon name='arrow-down-drop-circle' color='gray' size={30} /> : <Icon color='gray' name='arrow-down-drop-circle-outline' size={30} />}
-
-                                </TouchableOpacity>
-
-                                {isClicked2 ? (<View style={style.dropDownAera}>
-                                    {
-
-                                        product_Size && product_Size?.map((item) => {
-                                            return (
-                                                <ScrollView>
-                                                    <View >
-                                                        <TouchableOpacity
-                                                            style={style.countriesItem}
-                                                            onPress={() => {
-                                                                setsize(item.size_name);
-                                                                setsize_ID(item.size_id)
-                                                                getProductColor(item.size_id)
-                                                                setIsClicked2(false)
-
-
-                                                            }}>
-
-                                                            <Text style={{ color: 'black', fontSize: responsiveFontSize(2) }}>{item.size_name}</Text>
-
-                                                        </TouchableOpacity>
-
-                                                    </View>
-                                                </ScrollView>
-                                            )
-                                        })
-
-                                    }
-
-                                </View>) : null}
-                            </View>)}
-
-                            {/* -----------color selector--------------------------- */}
-
-                            {(no_colorData == 'no data' && size_ID == 0) ? null : (
-                                <View>
-                                    <TouchableOpacity style={style.dropDownSelector} onPress={() => { setIsClicked(!isClicked) }} disabled={size_ID == '0'}>
-                                        <Text style={{ fontSize: responsiveFontSize(2), color: 'gray' }}>{colorName == '' ? 'Select color' : colorName}</Text>
-                                        {isClicked ? <Icon name='arrow-down-drop-circle' color='gray' size={30} /> : <Icon color='gray' name='arrow-down-drop-circle-outline' size={30} />}
-
-                                    </TouchableOpacity>
-
-                                    {isClicked ? (
-                                        <View style={style.dropDownAera}>
-                                            <ScrollView>
-                                                {
-
-                                                    colors && colors.map((item) => {
-                                                        return (
-                                                            <View>
-                                                                <TouchableOpacity
-                                                                    style={style.countriesItem}
-                                                                    onPress={() => {
-                                                                        setColorName(item.color_name);
-                                                                        setColorID(item.color_id)
-                                                                        setIsClicked(false)
-                                                                    }}>
-
-                                                                    <Text style={{ color: 'black', fontSize: responsiveFontSize(2) }}>{item.color_name}</Text>
-
-                                                                </TouchableOpacity>
-                                                            </View>
-
-                                                        )
-                                                    })
-
-                                                }
-                                            </ScrollView>
-
-                                        </View>
-                                    ) : null}
-                                </View>
-                            )}
-                            {/* {stock_response.length == "0" ? (<Text style={{ color: 'red', padding: 10 }}>Stock not available</Text>) : null} */}
-                            {/* ---------------------------------------------------------------------------------------- */}
-                            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', margin: 5 }}>
-
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: responsiveWidth(40), margin: 5 }}>
-
-
-                                    <TouchableOpacity disabled={quantity == 1} onPress={() => dec()} >
-                                        <View style={{
-                                            backgroundColor: '#E7EAEF',
-                                            width: responsiveWidth(10),
-                                            height: responsiveHeight(4),
-                                            borderRadius: 5,
-                                            alignSelf: 'center',
-                                            alignItems: 'center',
-                                            shadowColor: "#000",
-                                            shadowOffset: {
-                                                width: 0,
-                                                height: 2,
-                                            },
-                                            shadowOpacity: 0.25,
-                                            shadowRadius: 3.84,
-                                            elevation: 5,
-                                        }}>
-                                            <Icon name="minus" color='black' size={30} />
-
-                                        </View>
-                                    </TouchableOpacity>
-
-                                    <Text style={{ color: 'black', fontSize: 20 }}>{quantity}</Text>
-
-
-
-                                    {available_quantity && colorID >= 0 && size_ID >= 0 ? (
-                                        <TouchableOpacity disabled={quantity == available_quantity} onPress={() => inc()}>
-
-                                            <View style={{
-                                                backgroundColor: '#E7EAEF',
-                                                width: responsiveWidth(10),
-                                                height: responsiveHeight(4),
-                                                borderRadius: 5,
-                                                alignSelf: 'center',
-                                                alignItems: 'center',
-                                                shadowColor: "#000",
-                                                shadowOffset: {
-                                                    width: 0,
-                                                    height: 2,
-                                                },
-                                                shadowOpacity: 0.25,
-                                                shadowRadius: 3.84,
-                                                elevation: 5,
-                                            }}>
-                                                <Icon name="plus" color='black' size={30} />
-
-                                            </View>
-                                        </TouchableOpacity>
-                                    ) : (
-                                        <View style={{
-                                            backgroundColor: '#E7EAEF',
-                                            width: responsiveWidth(10),
-                                            height: responsiveHeight(4),
-                                            borderRadius: 5,
-                                            alignSelf: 'center',
-                                            alignItems: 'center',
-                                            shadowColor: "#000",
-                                            shadowOffset: {
-                                                width: 0,
-                                                height: 2,
-                                            },
-                                            shadowOpacity: 0.25,
-                                            shadowRadius: 3.84,
-                                            elevation: 5,
-                                        }}>
-                                            <Icon name="plus" color='black' size={30} />
-
-                                        </View>
-                                    )}
-
-                                </View>
-                                {/* ------------------------------------------------------------------------------------------- */}
+                            <View>
                                 {viewCartData && viewCartData > 0 ? (
 
                                     <TouchableOpacity activeOpacity={.8} onPress={() => navigation.navigate('view_cart_details')}>
@@ -523,52 +380,179 @@ const ProductDetails = (props) => {
                                     </TouchableOpacity>) : null}
                             </View>
 
-                            <View style={{ marginLeft: 10 }}>
-                                <Text style={{ color: '#DD8560', fontSize: responsiveFontSize(3), fontWeight: 'bold', padding: 5 }}>Rs.{!update_price ? price * quantity : update_price * quantity}</Text>
+                        </View>
+
+                        <View >
+                            {/* -----------size selector--------------------------- */}
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+
+
+                                {no_Sizedata == 'no data' ? null : (
+                                    <View style={{ flexDirection: 'row', alignItems: 'center', margin: 10 }}>
+                                        <View>
+                                            <Text style={{ color: 'black', fontSize: responsiveFontSize(2) }}>Your size :</Text>
+                                        </View>
+                                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                            {product_Size && product_Size.map((item, index) => {
+                                                console.log(item)
+                                                return (
+                                                    <View >
+
+                                                        <TouchableOpacity
+                                                            onPress={() => {
+                                                                setsize(item.size_name);
+                                                                setsize_ID(item.size_id)
+                                                                getProductColor(item.size_id)
+                                                                setSelectRadio(item.size_id)
+
+
+                                                            }}>
+                                                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+
+                                                                <View style={{ borderColor: '#000', borderWidth: 1, width: responsiveWidth(8), height: responsiveHeight(4), borderRadius: 30, margin: 5 }}>
+                                                                    {selectRadio == item.size_id ? (
+                                                                        <View style={{ backgroundColor: '#000', width: responsiveWidth(6), height: responsiveHeight(3), borderRadius: 30, alignSelf: 'center', alignItems: 'center', justifyContent: 'center', margin: 3 }}></View>
+
+                                                                    ) : null}
+                                                                </View>
+
+                                                                <Text style={{ color: 'black', fontSize: responsiveFontSize(2), textAlign: 'center', }}> {item.size_name === 'Standard' ? 'std' : item.size_name === 'Medium' ? 'M' : item.size_name == 'Large' ? 'X' : item.size_name}</Text>
+                                                            </View>
+
+                                                        </TouchableOpacity>
+
+
+                                                    </View>
+                                                )
+                                            })}
+                                        </View>
+                                    </View>
+                                )}
+                            </View>
+
+                            {/* -----------color selector--------------------------- */}
+                            <View>
+
+                                {(no_colorData == 'no data' && size_ID == 0) ? null : (
+                                    <View style={{ flexDirection: 'column', alignItems: 'center', margin: 10 }}>
+                                        <View>
+                                            <Text style={{ color: 'black', fontSize: responsiveFontSize(2) }}>Your color :</Text>
+                                        </View>
+
+                                        <View>
+
+
+
+                                            {
+
+                                                colors && colors.map((item) => {
+                                                    return (
+                                                        <View >
+                                                            <TouchableOpacity
+                                                                onPress={() => {
+                                                                    setColorName(item.color_name);
+                                                                    setColorID(item.color_id)
+                                                                    setSelectRadio_color(item.color_id)
+                                                                }}>
+                                                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                                                    <View style={{ borderColor: '#000', borderWidth: 1, width: responsiveWidth(8), height: responsiveHeight(4), borderRadius: 30, margin: 5 }}>
+                                                                        {selectRadio_color == item.color_id ? (
+                                                                            <View style={{ backgroundColor: '#000', width: responsiveWidth(6), height: responsiveHeight(3), borderRadius: 30, alignSelf: 'center', alignItems: 'center', justifyContent: 'center', margin: 3 }}></View>
+
+                                                                        ) : null}
+                                                                    </View>
+
+
+                                                                    <Text style={{ color: '#000', fontSize: responsiveFontSize(2) }}>{item.color_name}</Text>
+                                                                </View>
+
+                                                            </TouchableOpacity>
+                                                        </View>
+
+                                                    )
+                                                })
+
+                                            }
+
+                                        </View>
+                                    </View>
+                                )}
+                            </View>
+
+                        </View>
+                        {/* ---------------------------------------------------------------------------------------- */}
+                        <View style={{ backgroundColor: '#fff', width: responsiveWidth(95), flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', alignSelf: 'center', borderRadius: 50, elevation: 10, shadowColor: '#000' }}>
+
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: responsiveWidth(30), padding: 5 }}>
+
+
+                                <TouchableOpacity disabled={quantity == 1} onPress={() => dec()} >
+                                    <View style={{ alignSelf: 'center' }}>
+                                        <Icon name="minus" color='black' size={22} />
+
+                                    </View>
+                                </TouchableOpacity>
+
+                                <Text style={{ color: 'black', fontSize: 20 }}>{quantity}</Text>
+
+
+
+                                {available_quantity && colorID >= 0 && size_ID >= 0 ? (
+                                    <TouchableOpacity disabled={quantity == available_quantity} onPress={() => inc()}>
+
+                                        <View style={{ alignSelf: 'center' }}>
+                                            <Icon name="plus" color='black' size={22} />
+
+                                        </View>
+                                    </TouchableOpacity>
+                                ) : (
+                                    <View style={{ alignSelf: 'center' }}>
+                                        <Icon name="plus" color='black' size={22} />
+
+                                    </View>
+                                )}
 
                             </View>
-                        </Animatable.View>
+                            {/* ------------------------------------------------------------------------------------------- */}
 
-                    </View>
+                            {/* -----------btn------------- */}
+                            <View style={{ width: responsiveWidth(65) }}>
 
+
+                                {available_quantity && colorID >= 0 && size_ID >= 0 ? (
+
+
+                                    <TouchableOpacity activeOpacity={0.8} onPress={() => { AddToCart() }} >
+                                        <View style={{
+                                            flexDirection: 'row', alignItems: 'center', backgroundColor: '#000',
+                                            padding: 10, borderRadius: 50,
+                                        }}>
+                                            <Icon name="plus" color="white" size={22} />
+                                            <Text style={{ color: 'white', marginLeft: 5, fontSize: responsiveFontSize(2.4) }}>
+                                                Add to Cart
+                                            </Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                ) : (
+                                    <Animatable.View animation={'slideInLeft'} style={{
+                                        flexDirection: 'row', alignItems: 'center', backgroundColor: '#000',
+                                        padding: 10, borderRadius: 50,
+                                    }}>
+                                        <Icon name="plus" color="white" size={22} />
+                                        <Text style={{ color: 'white', marginLeft: 5, fontSize: responsiveFontSize(2.4) }}>
+                                            Add to Cart
+                                        </Text>
+                                    </Animatable.View>
+                                )}
+                            </View>
+                        </View>
+
+
+                    </Animatable.View>
 
                 </View>
 
-                {/* -----------btn------------- */}
-
-                {available_quantity && colorID >= 0 && size_ID >= 0 ? (
-
-
-                    <TouchableOpacity activeOpacity={0.8} onPress={() => { AddToCart() }} >
-                        <View style={{
-                            flexDirection: 'row', alignItems: 'center', backgroundColor: 'black',
-                            padding: 5,
-                        }}>
-                            <Icon name="plus" color="white" size={25} />
-                            <Text style={{ color: 'white', marginLeft: 5, fontSize: responsiveFontSize(2.5) }}>
-                                Add to Cart
-                            </Text>
-                        </View>
-                    </TouchableOpacity>
-                ) : (
-                    <Animatable.View animation={'slideInLeft'} style={{
-                        flexDirection: 'row', alignItems: 'center', backgroundColor: 'gray',
-                        padding: 5,
-                    }}>
-                        <Icon name="plus" color="white" size={25} />
-                        <Text style={{ color: 'white', marginLeft: 5, fontSize: responsiveFontSize(2.5) }}>
-                            Add to Cart
-                        </Text>
-                    </Animatable.View>
-                )}
-
-
-
-
-
-
-
-                <View style={{ padding: 30, backgroundColor: '#F2F3F4' }}>
+                <View style={{ padding: 30, }}>
                     <Text style={{ color: 'gray', fontSize: 16, textAlign: 'center' }}>Copyright© Cogent Dev Software solution.</Text>
                 </View>
 

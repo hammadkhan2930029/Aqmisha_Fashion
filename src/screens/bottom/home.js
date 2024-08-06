@@ -79,41 +79,32 @@ const Home = ({ props }) => {
                 {isLoaded ?
                     (
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', width: responsiveWidth(100) }}>
-                            {arry.map((item) => {
-                                return (
-                                    <View style={{
-                                        backgroundColor: '#fff',
+                        {arry.map((item) => {
+                            return (
+                                <View style={{
+                                    backgroundColor: '#fff',
+                                    width: responsiveWidth(46),
+                                    height: responsiveHeight(46),
+                                    margin: 7,
+                                    borderRadius: 10,
+                                  
+                                }} >
+                                    <ShimmerView style={{
                                         width: responsiveWidth(46),
-                                        height: responsiveHeight(30),
-                                        margin: 7,
+                                        height: responsiveHeight(35),
                                         borderRadius: 10,
-                                        shadowColor: "#000",
-                                        shadowOffset: {
-                                            width: 0,
-                                            height: 2,
-                                        },
-                                        shadowOpacity: 0.25,
-                                        shadowRadius: 3.84,
+                                    }}>
+                                        <ShimmerView style={{ backgroundColor: '#9e9e9e', width: responsiveWidth(46), height: responsiveHeight(15), borderTopLeftRadius: 10, borderTopRightRadius: 10, opacity: .4 }}></ShimmerView>
+                                    </ShimmerView>
+                                    <View style={{ padding: 10, height: responsiveHeight(10), flexDirection: 'column', justifyContent: 'space-between' }}>
+                                        <ShimmerView style={{ width: responsiveWidth(40), height: responsiveHeight(3), backgroundColor: '#9e9e9e', opacity: .4, borderRadius: 8 }}></ShimmerView>
+                                        <ShimmerView style={{ width: responsiveWidth(30), height: responsiveHeight(3), backgroundColor: '#9e9e9e', opacity: .4, borderRadius: 8 }}></ShimmerView>
 
-                                        elevation: 5,
-                                    }} >
-                                        <ShimmerView style={{
-                                            width: responsiveWidth(46),
-                                            height: responsiveHeight(15),
-                                            borderRadius: 10,
-                                        }}>
-                                            <ShimmerView style={{ backgroundColor: '#9e9e9e', width: responsiveWidth(46), height: responsiveHeight(15), borderTopLeftRadius: 10, borderTopRightRadius: 10, opacity: .4 }}></ShimmerView>
-                                        </ShimmerView>
-                                        <View style={{ padding: 10, height: responsiveHeight(15), flexDirection: 'column', justifyContent: 'space-between' }}>
-                                            <ShimmerView style={{ width: responsiveWidth(40), height: responsiveHeight(3), backgroundColor: '#9e9e9e', opacity: .4, borderRadius: 8 }}></ShimmerView>
-                                            <ShimmerView style={{ width: responsiveWidth(30), height: responsiveHeight(3), backgroundColor: '#9e9e9e', opacity: .4, borderRadius: 8 }}></ShimmerView>
-                                            <ShimmerView style={{ width: responsiveWidth(15), height: responsiveHeight(3), backgroundColor: '#9e9e9e', opacity: .4, borderRadius: 8 }}></ShimmerView>
-
-                                        </View>
                                     </View>
-                                )
-                            })}
-                        </View>
+                                </View>
+                            )
+                        })}
+                    </View>
                     )
                     :
                     (
@@ -135,7 +126,7 @@ const Home = ({ props }) => {
                                         <Animatable.View animation={'fadeInUpBig'} style={style.card} key={index}>
                                             <View style={style.cardView}>
 
-                                                <Image style={{ resizeMode: 'contain', width: responsiveWidth(46), height: responsiveHeight(15), borderTopLeftRadius: 10, borderTopRightRadius: 10 }} source={{ uri: item.image }} />
+                                                <Image style={{ resizeMode: 'contain', width: responsiveWidth(46), height: responsiveHeight(35), borderRadius:10 }} source={{ uri: item.image }} />
                                             </View>
                                             <View style={{ padding: 10, height: responsiveHeight(12), borderBottomLeftRadius: 10, borderBottomRightRadius: 10, flexDirection: 'column', justifyContent: 'space-between' }}>
 
@@ -396,26 +387,26 @@ const style = StyleSheet.create({
     // -----------New Arrival Cards-------------
     card: {
 
-        backgroundColor: 'white',
+        backgroundColor: '#fff',
         width: responsiveWidth(46),
-        height: responsiveHeight(28),
+        height: responsiveHeight(46),
         margin: 7,
         borderRadius: 10,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
+        // shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: 2,
+        // },
+        // shadowOpacity: 0.25,
+        // shadowRadius: 3.84,
 
-        elevation: 5,
+        // elevation: 5,
 
 
     },
     cardView: {
         width: responsiveWidth(46),
-        height: responsiveHeight(15),
+        height: responsiveHeight(35),
         borderRadius: 10,
         shadowColor: "#000",
         shadowOffset: {

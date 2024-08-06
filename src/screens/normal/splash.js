@@ -21,7 +21,7 @@ const SplashScreen = ({ navigation }) => {
 
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>
-            <Animatable.Image animation={'flipInY'} style={{ width: responsiveWidth(50), height: responsiveHeight(30), resizeMode: 'contain' }} source={require('../../NewAssets/foreeshop.png')} />
+            <Animatable.Image animation={'flipInY'} style={{ width: responsiveWidth(50), height: responsiveHeight(30), resizeMode: 'contain' }} source={require('../../NewAssets/aqmisha.png')} />
         </View>
     )
 };

@@ -32,7 +32,7 @@ const NavbarTop = () => {
 
                 <View style={style.Logo}>
 
-                    <Image style={style.logoImage} source={require('../../NewAssets/foreeshop.png')} />
+                    <Image style={style.logoImage} source={require('../../NewAssets/aqmisha.png')} />
                 </View>
             </TouchableOpacity>
 

@@ -33,7 +33,7 @@ const Bottom = () => {
 
                 setuser_id(firstUserId);
             } else {
-                setuser_id(randomNumber)
+                setuser_id('')
             }
 
         } catch (e) {
