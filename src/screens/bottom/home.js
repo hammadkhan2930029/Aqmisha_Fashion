@@ -128,9 +128,9 @@ const Home = ({ props }) => {
 
                                                 <Image style={{ resizeMode: 'contain', width: responsiveWidth(46), height: responsiveHeight(35), borderRadius:10 }} source={{ uri: item.image }} />
                                             </View>
-                                            <View style={{ padding: 10, height: responsiveHeight(12), borderBottomLeftRadius: 10, borderBottomRightRadius: 10, flexDirection: 'column', justifyContent: 'space-between' }}>
+                                            <View style={{padding: 10, height: responsiveHeight(11), borderBottomLeftRadius: 10, borderBottomRightRadius: 10, flexDirection: 'column', justifyContent: 'space-between' }}>
 
-                                                <Text style={{ color: 'black', fontSize: responsiveFontSize(2.2), textAlign: 'center', fontWeight: '500' }}>{item.product_name} </Text>
+                                                <Text style={{ color: 'black', fontSize: responsiveFontSize(2.1), textAlign: 'center', fontWeight: '500' }}>{item.product_name} </Text>
 
 
                                                 <Text style={{ color: 'orange', fontSize: responsiveFontSize(2.5), textAlign: 'center' }}>Rs.{item.price}</Text>
@@ -392,15 +392,7 @@ const style = StyleSheet.create({
         height: responsiveHeight(46),
         margin: 7,
         borderRadius: 10,
-        // shadowColor: "#000",
-        // shadowOffset: {
-        //     width: 0,
-        //     height: 2,
-        // },
-        // shadowOpacity: 0.25,
-        // shadowRadius: 3.84,
-
-        // elevation: 5,
+      
 
 
     },

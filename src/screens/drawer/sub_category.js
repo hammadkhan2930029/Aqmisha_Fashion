@@ -25,7 +25,7 @@ export const Sub_category = (props) => {
 
     const subCategory = async () => {
         try {
-            const response = await fetch(`https://demo.cogentecommerce.com/api/view_data_api.php?view=sub-category&category_id=${category_id}`)
+            const response = await fetch(`https://aqmishafashion.online/api/view_data_api.php?view=sub-category&category_id=${category_id}`)
             const res = await response.json()
                 .then((res) => {
 

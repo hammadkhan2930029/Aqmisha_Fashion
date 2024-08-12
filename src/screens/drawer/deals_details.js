@@ -56,7 +56,7 @@ const Deals_detail = (props) => {
     // -----------------------------------------------------------------------------------------------------
     const getAddtocart = async () => {
         try {
-            const url = `https://demo.cogentecommerce.com/api/cart_api.php?cart=cart-products&user_id=${user_id}`;
+            const url = `https://aqmishafashion.online/api/cart_api.php?cart=cart-products&user_id=${user_id}`;
             const response = await fetch(url);
             const result = await response.json();
 
@@ -91,7 +91,7 @@ const Deals_detail = (props) => {
 
 
         try {
-            const url = `https://demo.cogentecommerce.com/api/cart_api.php?cart=add-to-cart-deal`;
+            const url = `https://aqmishafashion.online/api/cart_api.php?cart=add-to-cart-deal`;
             await fetch(url, {
                 method: 'POST',
                 headers: {

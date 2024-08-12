@@ -24,7 +24,7 @@ const About = () => {
     // const [loader,setLoader]=useState(true)
     const about = async () => {
         try {
-            const url = `https://demo.cogentecommerce.com/api/view_data_api.php?view=about`
+            const url = `https://aqmishafashion.online/api/view_data_api.php?view=about`
             const response = await fetch(url)
             const result = await response.json()
                 .then((result) => {

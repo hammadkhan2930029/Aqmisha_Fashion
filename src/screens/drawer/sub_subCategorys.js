@@ -46,7 +46,7 @@ export const Sub_subCategory = (props) => {
     const sub_subCategory = async () => {
 
         try {
-            const response = await fetch(`https://demo.cogentecommerce.com/api/view_data_api.php?view=sub-sub-category&category_id=${category_id}&sub_category_id=${sub_category_id}`)
+            const response = await fetch(`https://aqmishafashion.online/api/view_data_api.php?view=sub-sub-category&category_id=${category_id}&sub_category_id=${sub_category_id}`)
             const res = await response.json()
                 .then((res) => {
                     const sub_sub_id = res.msg.map((item) => +item.sub_sub_category_id)
@@ -68,7 +68,7 @@ export const Sub_subCategory = (props) => {
     const brandApi = async () => {
         try {
 
-            const response = await fetch(`https://demo.cogentecommerce.com/api/view_data_api.php?view=brand`)
+            const response = await fetch(`https://aqmishafashion.online/api/view_data_api.php?view=brand`)
             const result = await response.json()
                 .then((result) => {
                     result.msg.map((item) => {
@@ -92,7 +92,7 @@ export const Sub_subCategory = (props) => {
 
         try {
 
-            const response = await fetch(`https://demo.cogentecommerce.com/api/view_data_api.php?view=products&category_id=${category_id}&sub_category_id=${sub_category_id}&sub_sub_category_id=${id}&brand_id=${brandData}`)
+            const response = await fetch(`https://aqmishafashion.online/api/view_data_api.php?view=products&category_id=${category_id}&sub_category_id=${sub_category_id}&sub_sub_category_id=${id}&brand_id=${brandData}`)
 
             const result = await response.json()
                 .then((result) => {

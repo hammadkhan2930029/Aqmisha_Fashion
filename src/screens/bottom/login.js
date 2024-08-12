@@ -119,7 +119,7 @@ const LogIn = () => {
         setvisible(true)
         try {
 
-            const url = `https://demo.cogentecommerce.com/api/user_api.php?user=login&email=${values.email}&password=${values.password}`
+            const url = `https://aqmishafashion.online/api/user_api.php?user=login&email=${values.email}&password=${values.password}`
             const respons = await fetch(url)
             let result = await respons.json()
                 .then((result) => {

@@ -48,7 +48,7 @@ const CustomDrawer = (props) => {
     const [CatData, setCatData] = useState([])
     const category = async () => {
         try {
-            const response = await fetch("https://demo.cogentecommerce.com/api/view_data_api.php?view=category")
+            const response = await fetch("https://aqmishafashion.online/api/view_data_api.php?view=category")
             const res = await response.json()
                 .then((res) => {
 
@@ -87,7 +87,7 @@ const CustomDrawer = (props) => {
                                         <View key={index}>
                                             {item.response == 'failed' ? (
                                                 <View style={{
-                                                    backgroundColor: '#31708f', shadowColor: "#000",
+                                                    backgroundColor: ' #d4d4d4', shadowColor: "#000",
                                                     shadowOffset: {
                                                         width: 0,
                                                         height: 2,
@@ -97,7 +97,7 @@ const CustomDrawer = (props) => {
                                                     padding: 5,
                                                     elevation: 5,
                                                 }}>
-                                                    <View onPress={() => Linking.openURL('https://foreeshop.com.pk/')} style={{
+                                                    <View onPress={() => Linking.openURL('https://aqmishafashion.online/')} style={{
                                                         width: responsiveWidth(20), height: responsiveHeight(10), borderRadius: 100, backgroundColor: 'white', shadowColor: "#000",
                                                         shadowOffset: {
                                                             width: 0,
@@ -108,14 +108,14 @@ const CustomDrawer = (props) => {
                                                         margin: 10,
                                                         elevation: 5,
                                                     }}>
-                                                        <Image style={{ width: responsiveWidth(20), height: responsiveHeight(10), borderRadius: 100 }} source={require('../../NewAssets/foreeshop.png')} />
+                                                        <Image style={{ width: responsiveWidth(20), height: responsiveHeight(10) }} source={require('../../NewAssets/aqmisha.png')} />
 
                                                     </View>
                                                 </View>
                                             ) : (
 
                                                 <View style={{
-                                                    backgroundColor: '#31708f', shadowColor: "#000",
+                                                    backgroundColor: '#d4d4d4', shadowColor: "#000",
                                                     shadowOffset: {
                                                         width: 0,
                                                         height: 2,
@@ -159,7 +159,7 @@ const CustomDrawer = (props) => {
                             </View>
                         ) : (
                             <View style={{
-                                backgroundColor: '#31708f', shadowColor: "#000",
+                                backgroundColor: '#d4d4d4', shadowColor: "#000",
                                 shadowOffset: {
                                     width: 0,
                                     height: 2,
@@ -169,7 +169,7 @@ const CustomDrawer = (props) => {
                                 padding: 5,
                                 elevation: 5,
                             }}>
-                                <TouchableOpacity onPress={() => Linking.openURL('https://foreeshop.com.pk/')}>
+                                <TouchableOpacity onPress={() => Linking.openURL('https://aqmishafashion.online/')}>
 
                                     <View style={{
                                         width: responsiveWidth(20), height: responsiveHeight(10), borderRadius: 100, backgroundColor: 'white', shadowColor: "#000",
@@ -182,7 +182,7 @@ const CustomDrawer = (props) => {
                                         margin: 10,
                                         elevation: 5,
                                     }}>
-                                        <Image style={{ width: responsiveWidth(20), height: responsiveHeight(10), borderRadius: 100 }} source={require('../../NewAssets/foreeshop.png')} />
+                                        <Image style={{ width: responsiveWidth(20), height: responsiveHeight(10)}} source={require('../../NewAssets/aqmisha.png')} />
 
                                     </View>
                                 </TouchableOpacity>

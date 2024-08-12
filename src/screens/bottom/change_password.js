@@ -77,7 +77,7 @@ const Change_password = () => {
         formData.append('confirm_password', values.confirm_password);
 
 
-        const url = 'https://demo.cogentecommerce.com/api/user_api.php?user=change_password';
+        const url = 'https://aqmishafashion.online/api/user_api.php?user=change_password';
         await fetch(url, {
             method: 'POST',
             headers: {

@@ -9,7 +9,7 @@ export const ProductProvider = ({ children }) => {
     const brandApi = async () => {
         try {
 
-            const response = await fetch(`https://demo.cogentecommerce.com/api/view_data_api.php?view=brand`)
+            const response = await fetch(`https://aqmishafashion.online/api/view_data_api.php?view=brand`)
             const result = await response.json()
                 .then((result) => {
                     result.msg.map((item) => {
@@ -33,7 +33,7 @@ export const ProductProvider = ({ children }) => {
 
     const product = async () => {
         try {
-            const response = await fetch(`https://demo.cogentecommerce.com/api/view_data_api.php?view=products&category_id=&sub_category_id=&sub_sub_category_id=&brand_id=${brandData}`);
+            const response = await fetch(`https://aqmishafashion.online/api/view_data_api.php?view=products&category_id=&sub_category_id=&sub_sub_category_id=&brand_id=${brandData}`);
             const result = await response.json();
             setProductData(result.msg);
             setIsLoaded(false);

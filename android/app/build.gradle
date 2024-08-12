@@ -94,9 +94,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.estore"
+    namespace "com.aqmishafashion"
     defaultConfig {
-        applicationId "com.estore"
+        applicationId "com.aqmishafashion"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -132,6 +132,8 @@ lintOptions {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+              buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", "false" // Add this line
+            buildConfigField "boolean", "IS_HERMES_ENABLED", "false" // Add this line
 
         }
         release {
@@ -140,6 +142,8 @@ lintOptions {
             signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+             buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", "false" // Add this line
+            buildConfigField "boolean", "IS_HERMES_ENABLED", "false" // Add this line
         }
     }
 

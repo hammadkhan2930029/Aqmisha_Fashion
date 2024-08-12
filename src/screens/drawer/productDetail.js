@@ -95,7 +95,7 @@ const ProductDetails = (props) => {
     // -----------------------------------------------------------------------------------------------------
     const getAddtocart = async () => {
         try {
-            const url = `https://demo.cogentecommerce.com/api/cart_api.php?cart=cart-products&user_id=${user_id}`;
+            const url = `https://aqmishafashion.online/api/cart_api.php?cart=cart-products&user_id=${user_id}`;
             const response = await fetch(url);
             const result = await response.json();
 
@@ -124,7 +124,7 @@ const ProductDetails = (props) => {
         formData.append('size_id', size_ID);
 
         try {
-            const url = `https://demo.cogentecommerce.com/api/cart_api.php?cart=add-to-cart`;
+            const url = `https://aqmishafashion.online/api/cart_api.php?cart=add-to-cart`;
             await fetch(url, {
                 method: 'POST',
                 headers: {
@@ -156,12 +156,15 @@ const ProductDetails = (props) => {
     };
     // ------------------------------------------------------------------------------------------------------
     const getProductColor = async (size) => {
+        console.log('size', size)
         try {
-            const url = `https://demo.cogentecommerce.com/api/view_data_api.php?view=product-colors&product_id=${product_id}&size_id=${size}`;
+            const url = `https://aqmishafashion.online/api/view_data_api.php?view=product-colors&product_id=${product_id}&size_id=${size}`;
             const response = await fetch(url);
             const result = await response.json();
 
             if (result && result.msg) {
+                console.log('color result', result)
+
                 setcolors(result.msg);
                 const noData = result.msg.map((item) => item.response);
                 setNo_colorData(noData);
@@ -180,7 +183,7 @@ const ProductDetails = (props) => {
     // ------------------------------------------------------------------------------------------------
     const get_product_size = async () => {
         try {
-            const url = `https://demo.cogentecommerce.com/api/view_data_api.php?view=product-sizes&product_id=${product_id}`;
+            const url = `https://aqmishafashion.online/api/view_data_api.php?view=product-sizes&product_id=${product_id}`;
             const response = await fetch(url);
             const result = await response.json();
 
@@ -206,23 +209,23 @@ const ProductDetails = (props) => {
     };
     useEffect(() => {
         get_product_size();
+        getProductColor()
     }, [product_id]);
 
 
 
 
-    // console.log('color', colors, 'no color', no_colorData)
     // ------------------------------------------------------------------------------------------------------
     const stock_price = async () => {
         try {
-            const url = `https://demo.cogentecommerce.com/api/view_data_api.php?view=product-stock-price&product_id=${product_id}&color_id=${colorID}&size_id=${size_ID}`;
+            const url = `https://aqmishafashion.online/api/view_data_api.php?view=product-stock-price&product_id=${product_id}&color_id=${colorID}&size_id=${size_ID}`;
             const response = await fetch(url);
             const result = await response.json();
 
             if (result && result.msg) {
                 result.msg.map((item) => {
                     if (item) {
-                        console.log('item', item)
+                        console.log('item stock', item)
                         setStock_response(item)
                         // console.log('stock', item.available_quantity)
                         setupdate_price(item.up_price);
@@ -240,12 +243,13 @@ const ProductDetails = (props) => {
 
 
     useEffect(() => {
+        stock_price();
+
         if (colorID >= 0 || size_ID >= 0) {
             stock_price();
         }
     }, [product_id, colorID, size_ID]);
-    // console.log('avalabile quantity', available_quantity, 'quantity ', quantity,)
-    // console.log('no stock',no_stock)
+
     // --------------------------------------------------------------------------------------------------------
     useFocusEffect(
         React.useCallback(() => {
@@ -262,6 +266,8 @@ const ProductDetails = (props) => {
             setViewCartData('');
             setVisible(true);
             setStock_response('')
+            setSelectRadio('')
+            setSelectRadio_color('')
         }, [])
     );
     //---------------------------------------------------------------------------------------
@@ -286,7 +292,7 @@ const ProductDetails = (props) => {
     }, [navigation]);
 
     //-------------------------------------------------------------------------------------
-
+    console.log('no size',no_Sizedata)
 
     return (
         // ---------------Top Navbar-----------------
@@ -309,7 +315,7 @@ const ProductDetails = (props) => {
                     height: responsiveHeight(60),
                     alignSelf: 'center',
                 }}>
-                    <Animatable.Image animation={'slideInDown'} style={{ width: responsiveWidth(100), height: responsiveHeight(60), resizeMode: 'contain', alignSelf: 'center' }} source={{ uri: image }} />
+                    <Animatable.Image animation={'slideInDown'} style={{ width: responsiveWidth(100), height: responsiveHeight(70), alignSelf: 'center', resizeMode: 'contain' }} source={{ uri: image }} />
 
                 </Animatable.View>
             </View>
@@ -332,6 +338,7 @@ const ProductDetails = (props) => {
                     shadowOpacity: 0.25,
                     shadowRadius: 3.84,
                     elevation: 5,
+                    // padding:10
                 }}
                 refreshControl={
                     <RefreshControl
@@ -344,20 +351,25 @@ const ProductDetails = (props) => {
 
                     <Animatable.View animation={'slideInUp'} >
 
-                        <View style={{ width: responsiveWidth(90), flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', alignSelf: 'center', margin: 8 }}>
-                            <Text style={{ color: 'black', fontSize: responsiveFontSize(3.5), fontWeight: 'bold' }}>{product_name}</Text>
+                        <View style={{ width: responsiveWidth(95), flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', alignSelf: 'center', margin: 8 }}>
+                            <View style={{ width: responsiveWidth(70) }}>
 
-                            <Text style={{ color: '#DD8560', fontSize: responsiveFontSize(3), fontWeight: 'bold', padding: 5 }}>Rs.{!update_price ? price * quantity : update_price * quantity}</Text>
+                                <Text style={{ color: 'black', fontSize: responsiveFontSize(3.5), fontWeight: 'bold',padding: 5 }}>{product_name}</Text>
+                            </View>
+                            <View style={{ width: responsiveWidth(25) }}>
+
+                                <Text style={{ color: '#DD8560', fontSize: responsiveFontSize(2.8), fontWeight: 'bold', padding: 5 }}>Rs.{!update_price ? price * quantity : update_price * quantity}</Text>
+                            </View>
 
 
                         </View>
                         <View style={{ width: responsiveWidth(90), flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', alignSelf: 'center' }}>
-                            <View>
+                            <View style={{width:responsiveWidth(70)}}>
                                 <Text style={{ color: 'black', fontSize: responsiveFontSize(2.5), padding: 5 }}>{brand}</Text>
                                 <Text style={{ color: 'black', fontSize: responsiveFontSize(2.5), padding: 5 }}>{plainText}</Text>
 
                             </View>
-                            <View>
+                            <View style={{width:responsiveWidth(20)}}>
                                 {viewCartData && viewCartData > 0 ? (
 
                                     <TouchableOpacity activeOpacity={.8} onPress={() => navigation.navigate('view_cart_details')}>
@@ -382,15 +394,15 @@ const ProductDetails = (props) => {
 
                         </View>
 
-                        <View >
+                        <View style={{ width: responsiveWidth(95) }}>
                             {/* -----------size selector--------------------------- */}
-                            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <View>
 
 
                                 {no_Sizedata == 'no data' ? null : (
                                     <View style={{ flexDirection: 'row', alignItems: 'center', margin: 10 }}>
                                         <View>
-                                            <Text style={{ color: 'black', fontSize: responsiveFontSize(2) }}>Your size :</Text>
+                                            <Text style={{ color: 'black', fontSize: responsiveFontSize(2) }}>Size :</Text>
                                         </View>
                                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                             {product_Size && product_Size.map((item, index) => {
@@ -409,14 +421,29 @@ const ProductDetails = (props) => {
                                                             }}>
                                                             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
 
-                                                                <View style={{ borderColor: '#000', borderWidth: 1, width: responsiveWidth(8), height: responsiveHeight(4), borderRadius: 30, margin: 5 }}>
+                                                                {/* <View style={{ borderColor: '#000', borderWidth: 1, width: responsiveWidth(8), height: responsiveHeight(4), borderRadius: 30, margin: 5 }}>
                                                                     {selectRadio == item.size_id ? (
                                                                         <View style={{ backgroundColor: '#000', width: responsiveWidth(6), height: responsiveHeight(3), borderRadius: 30, alignSelf: 'center', alignItems: 'center', justifyContent: 'center', margin: 3 }}></View>
 
                                                                     ) : null}
-                                                                </View>
+                                                                </View> */}
+                                                                <View style={{
+                                                                    // width: responsiveWidth(8),
+                                                                    // width: responsiveWidth(8),
 
-                                                                <Text style={{ color: 'black', fontSize: responsiveFontSize(2), textAlign: 'center', }}> {item.size_name === 'Standard' ? 'std' : item.size_name === 'Medium' ? 'M' : item.size_name == 'Large' ? 'X' : item.size_name}</Text>
+                                                                    height: responsiveHeight(4),
+                                                                    backgroundColor: selectRadio == item.size_id ? '#000' : null,
+                                                                    borderRadius: 50,
+                                                                    alignSelf: 'center',
+                                                                    marginLeft: 5,
+                                                                    padding: 6,
+
+                                                                }}>
+
+                                                                    {/* <Text style={{ color: selectRadio == item.size_id ? '#fff' : '#000', fontSize: responsiveFontSize(2), textAlign: 'center' }}> {item.size_name === 'Standard' ? 'std' : item.size_name === 'Medium' ? 'M' : item.size_name == 'Large' ? 'X' : item.size_name}</Text> */}
+                                                                    <Text style={{ color: selectRadio == item.size_id ? '#fff' : '#000', fontSize: responsiveFontSize(2), textAlign: 'center' }}> {item.size_name}</Text>
+
+                                                                </View>
                                                             </View>
 
                                                         </TouchableOpacity>
@@ -433,10 +460,10 @@ const ProductDetails = (props) => {
                             {/* -----------color selector--------------------------- */}
                             <View>
 
-                                {(no_colorData == 'no data' && size_ID == 0) ? null : (
-                                    <View style={{ flexDirection: 'column', alignItems: 'center', margin: 10 }}>
+                                {(no_colorData == 'no data' || size_ID == '0') ? null : (
+                                    <View style={{ flexDirection: 'row', alignItems: 'center', margin: 10 }}>
                                         <View>
-                                            <Text style={{ color: 'black', fontSize: responsiveFontSize(2) }}>Your color :</Text>
+                                            <Text style={{ color: 'black', fontSize: responsiveFontSize(2) }}>Color :</Text>
                                         </View>
 
                                         <View>
@@ -454,16 +481,18 @@ const ProductDetails = (props) => {
                                                                     setColorID(item.color_id)
                                                                     setSelectRadio_color(item.color_id)
                                                                 }}>
-                                                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                                                    <View style={{ borderColor: '#000', borderWidth: 1, width: responsiveWidth(8), height: responsiveHeight(4), borderRadius: 30, margin: 5 }}>
-                                                                        {selectRadio_color == item.color_id ? (
-                                                                            <View style={{ backgroundColor: '#000', width: responsiveWidth(6), height: responsiveHeight(3), borderRadius: 30, alignSelf: 'center', alignItems: 'center', justifyContent: 'center', margin: 3 }}></View>
+                                                                <View style={{
+                                                                    backgroundColor: selectRadio_color == item.color_id ? "#000" : null,
+                                                                    flexDirection: 'row',
+                                                                    alignItems: 'center',
+                                                                    borderRadius: 50,
+                                                                    padding: 5,
+                                                                    marginTop: 5
+                                                                }}>
 
-                                                                        ) : null}
-                                                                    </View>
 
 
-                                                                    <Text style={{ color: '#000', fontSize: responsiveFontSize(2) }}>{item.color_name}</Text>
+                                                                    <Text style={{ color: selectRadio_color == item.color_id ? '#fff' : '#000', fontSize: responsiveFontSize(2) }}>{item.color_name}</Text>
                                                                 </View>
 
                                                             </TouchableOpacity>
@@ -481,7 +510,7 @@ const ProductDetails = (props) => {
 
                         </View>
                         {/* ---------------------------------------------------------------------------------------- */}
-                        <View style={{ backgroundColor: '#fff', width: responsiveWidth(95), flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', alignSelf: 'center', borderRadius: 50, elevation: 10, shadowColor: '#000' }}>
+                        <View style={{ backgroundColor: '#f5f5f5', width: responsiveWidth(95), flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', alignSelf: 'center', borderRadius: 50, elevation: 5, shadowColor: '#000', margin: 5 }}>
 
                             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: responsiveWidth(30), padding: 5 }}>
 
@@ -552,9 +581,7 @@ const ProductDetails = (props) => {
 
                 </View>
 
-                <View style={{ padding: 30, }}>
-                    <Text style={{ color: 'gray', fontSize: 16, textAlign: 'center' }}>Copyright© Cogent Dev Software solution.</Text>
-                </View>
+
 
             </ScrollView>
 

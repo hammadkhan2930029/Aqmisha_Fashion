@@ -64,7 +64,7 @@ const View_cart_details = (props) => {
     // Fetching cart data------------------------------------------------------------
     const add_to_cart = async () => {
         try {
-            const url = `https://demo.cogentecommerce.com/api/cart_api.php?cart=cart-products&user_id=${userId}`;
+            const url = `https://aqmishafashion.online/api/cart_api.php?cart=cart-products&user_id=${userId}`;
             const response = await fetch(url);
             const result = await response.json();
             if (result.msg) {
@@ -91,7 +91,7 @@ const View_cart_details = (props) => {
     // Deleting cart item----------------------------------------------------------------------
     const deleteCart = async (id) => {
         try {
-            const url = `https://demo.cogentecommerce.com/api/cart_api.php?cart=delete-cart-item&id=${id}`;
+            const url = `https://aqmishafashion.online/api/cart_api.php?cart=delete-cart-item&id=${id}`;
             const response = await fetch(url, { method: 'delete' });
             if (response.ok) {
                 add_to_cart();
@@ -107,7 +107,7 @@ const View_cart_details = (props) => {
     // Incrementing quantity-----------------------------------------------------------------------
     const inc = async (cart_id) => {
         try {
-            const url = `https://demo.cogentecommerce.com/api/cart_api.php?cart=add-quantity&id=${cart_id}`;
+            const url = `https://aqmishafashion.online/api/cart_api.php?cart=add-quantity&id=${cart_id}`;
             const response = await fetch(url);
             if (response.ok) {
                 add_to_cart();
@@ -123,7 +123,7 @@ const View_cart_details = (props) => {
     // Decrementing quantity--------------------------------------------------------------------------
     const dec = async (cart_id) => {
         try {
-            const url = `https://demo.cogentecommerce.com/api/cart_api.php?cart=sub-quantity&id=${cart_id}`;
+            const url = `https://aqmishafashion.online/api/cart_api.php?cart=sub-quantity&id=${cart_id}`;
             const response = await fetch(url);
             if (response.ok) {
                 add_to_cart();
@@ -210,7 +210,7 @@ const View_cart_details = (props) => {
                                         <View>
                                             {item.product_name ? (
 
-                                                <Animatable.View animation={'fadeInDown'} style={{ alignSelf: 'center' }}>
+                                                <Animatable.View animation={'fadeInDown'} style={{ alignSelf: 'center',margin:2 }}>
                                                     <View key={index} style={{
                                                         width: responsiveWidth(98), flexDirection: 'row', alignItems: 'center', backgroundColor: '#ffffff', justifyContent: 'space-between', borderRadius: 10, marginTop: 5, padding: 6, shadowColor: "#000",
                                                         shadowOffset: {
@@ -219,9 +219,9 @@ const View_cart_details = (props) => {
                                                         },
                                                         shadowOpacity: 0.25,
                                                         shadowRadius: 3.84,
-                                                        elevation: 5,
-                                                        borderColor: 'gray',
-                                                        borderWidth: .5
+                                                        elevation: 10,
+                                                        // borderColor: 'gray',
+                                                        // borderWidth: .5
                                                     }}>
                                                         <View>
                                                             <Image style={{ resizeMode: 'contain', width: responsiveWidth(40), height: responsiveHeight(15) }} source={{ uri: item.product_image }} />

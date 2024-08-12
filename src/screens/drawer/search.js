@@ -17,7 +17,7 @@ const Search = () => {
     const searchUser = async (text) => {
         console.log(text);
         try {
-            const url = `https://demo.cogentecommerce.com/api/view_data_api.php?view=product-search&key_word=${text}`;
+            const url = `https://aqmishafashion.online/api/view_data_api.php?view=product-search&key_word=${text}`;
             let response = await fetch(url);
 
             if (!response.ok) {

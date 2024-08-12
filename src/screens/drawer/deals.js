@@ -23,7 +23,7 @@ const Deals = () => {
     const [isloaded, setIsLoaded] = useState(true)
     const deals = async () => {
         try {
-            const url = `https://demo.cogentecommerce.com/api/view_data_api.php?view=deals`
+            const url = `https://aqmishafashion.online/api/view_data_api.php?view=deals`
             const response = await fetch(url)
             const result = await response.json()
                 .then((result) => {

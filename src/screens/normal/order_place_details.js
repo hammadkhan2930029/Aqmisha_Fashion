@@ -48,7 +48,7 @@ const Orderplace_details = (props) => {
 
     const view_order = async () => {
         try {
-            let url = `https://demo.cogentecommerce.com/api/order_api.php?order=view-orders&user_id=${user_id}`
+            let url = `https://aqmishafashion.online/api/order_api.php?order=view-orders&user_id=${user_id}`
             const respons = await fetch(url)
             const result = await respons.json()
                 .then((result) => {
@@ -75,7 +75,7 @@ const Orderplace_details = (props) => {
     const [order_details, setOrder_details] = useState()
     const view_order_details = async (order_id) => {
         try {
-            let url = `https://demo.cogentecommerce.com/api/order_api.php?order=view-order-detail&order_id=${order_id}`
+            let url = `https://aqmishafashion.online/api/order_api.php?order=view-order-detail&order_id=${order_id}`
             const respons = await fetch(url)
             const result = await respons.json()
                 .then((result) => {

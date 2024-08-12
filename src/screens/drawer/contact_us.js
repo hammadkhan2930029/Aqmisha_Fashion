@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import { View, Text, TouchableOpacity, SafeAreaView, TextInput, Image, ScrollView,BackHandler } from "react-native"
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import NavbarTop from "./navbar";
@@ -12,9 +12,11 @@ import { object, string, number, date, InferType, Yup } from 'yup';
 import * as Animatable from 'react-native-animatable';
 import { useToast } from "react-native-toast-notifications";
 import AnimatedLoader from 'react-native-animated-loader';
+import { useNavigation } from "@react-navigation/native";
 
 
 const Contact_us = () => {
+    const navigation = useNavigation();
 const toast = useToast();
     const contact_Api = async (value) => {
         var formData = new FormData();
@@ -24,7 +26,7 @@ const toast = useToast();
         formData.append("message", value.message);
 
         try {
-            const url = `https://demo.cogentecommerce.com/api/contact_mail_api.php?contact=post`
+            const url = `https://aqmishafashion.online/api/contact_mail_api.php?contact=post`
             const response = await fetch(url, {
                 method: 'post',
                 headers: {
