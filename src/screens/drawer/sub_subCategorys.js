@@ -41,7 +41,7 @@ export const Sub_subCategory = (props) => {
     const [isLoaded, setIsloaded] = useState(true)
     // ----------Sub Category---------------------
     const [sub_subCatData, setSub_subCatData] = useState([])
-    const [id, setid] = useState([]);
+    const [id, setid] = useState();
 
     const sub_subCategory = async () => {
 
@@ -64,6 +64,7 @@ export const Sub_subCategory = (props) => {
     useEffect(() => {
         sub_subCategory()
     }, [sub_category_id])
+    console.log('id', id, 'subcatpgry id', sub_category_id, 'category id', category_id, 'brandData', brandData)
     // ------------------brand Api--------------------
     const brandApi = async () => {
         try {
@@ -96,7 +97,7 @@ export const Sub_subCategory = (props) => {
 
             const result = await response.json()
                 .then((result) => {
-                    console.log(result.msg)
+                    console.log('product', result)
                     setProductData(result.msg);
                     setIsloaded(false)
 
@@ -120,7 +121,7 @@ export const Sub_subCategory = (props) => {
         }, [])
     );
     let iconName;
-    
+
     return (
         <SafeAreaView style={{ backgroundColor: '#fff', flex: 1 }}>
 
@@ -207,9 +208,11 @@ export const Sub_subCategory = (props) => {
 
                             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', width: responsiveWidth(100) }}>
                                 {productData?.map((item, index) => {
-                                    return (
+                                    console.log('item', item)
+                                    return(
+                                    <View>
                                         <View>
-                                            {item.price ? (
+                                            {item.response !== 'no data' ? (
                                                 <TouchableOpacity activeOpacity={.8} onPress={() => navigation.navigate('productDetails', {
                                                     image: item.image,
                                                     product_name: item.product_name,
@@ -235,9 +238,10 @@ export const Sub_subCategory = (props) => {
                                                         </View>
                                                     </Animatable.View>
                                                 </TouchableOpacity>
-                                            ) : (<Text style={{ fontSize: responsiveFontSize(2), padding: 10, textAlign: 'center' }}>Data not found</Text>)}
+                                            ) : (<Text style={{ fontSize: responsiveFontSize(2), padding: 10, textAlign: 'center' ,color:'red'}}>Data not found</Text>)}
 
                                         </View>
+                                    </View>
                                     )
                                 })}
 

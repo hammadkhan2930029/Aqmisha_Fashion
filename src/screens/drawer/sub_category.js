@@ -64,7 +64,7 @@ export const Sub_category = (props) => {
             {isloaded ? (<ActivityIndicator size="large" color="#0000ff" />) : (
                 <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', width: responsiveWidth(100) }}>
                     {subCatData?.map((item, index) => {
-                        // console.log(item)
+                        console.log('sub-cat',item)
 
                         return (
                             <TouchableOpacity activeOpacity={.6} disabled={item.response == 'no data'} onPress={() => navigation.navigate('sub_sub_category', {
@@ -87,7 +87,7 @@ export const Sub_category = (props) => {
                                         padding: 10
                                     }}>
 
-                                        <Icon style={{ alignSelf: 'center' }} name={item.sub_category_name == 'Women' ? 'woman' :'error-outline'} color='black' size={40} />
+                                        <Icon style={{ alignSelf: 'center' }} name='error-outline' color='black' size={40} />
                                     </View>
 
                                     <Text style={{ fontSize: responsiveFontSize(2), color: 'black', fontWeight: '600', textAlign: 'center' }}>{item.sub_category_name || 'data not found'}</Text>
