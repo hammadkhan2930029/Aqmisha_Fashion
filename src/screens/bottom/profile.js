@@ -119,11 +119,7 @@ const Profile = (props) => {
                 elevation: 5,
                 padding: 5,
             }}>
-                <TouchableOpacity activeOpacity={.5} onPress={() => navigation.navigate('main')}>
-                    <View style={styles.icon}>
-                        <AnotherIcon name='keyboard-arrow-left' size={30} color='#000' />
-                    </View>
-                </TouchableOpacity>
+               
 
 
 

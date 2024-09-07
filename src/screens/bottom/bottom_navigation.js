@@ -71,6 +71,8 @@ const Bottom = () => {
             console.log(error)
         }
     }
+    getAddtocart()
+
 
     useEffect(() => {
         getMyObject()
@@ -78,17 +80,19 @@ const Bottom = () => {
         getAddtocart()
 
 
-    }, [user_id])
+    }, [user])
     console.log('user id ', user_id)
+    console.log('user', user)
+
     console.log('lenght', viewCartData)
-    
+
     useFocusEffect(
         React.useCallback(() => {
-            //   getAddtocart()
+            getAddtocart()
             setViewCartData('')
         }, [])
     );
-   
+
     return (
         <Tab.Navigator screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, size, color }) => {
@@ -126,6 +130,7 @@ const Bottom = () => {
             }
 
         })}
+         initialRouteName="Home"
         >
             <Tab.Screen name="Home" component={Home} options={{ headerShown: false }} />
             <Tab.Screen name="view_cart_details" component={View_Cart_details} options={{ headerShown: false, tabBarBadge: viewCartData > 0 ? viewCartData : null }} />

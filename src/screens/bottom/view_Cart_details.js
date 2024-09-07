@@ -210,7 +210,7 @@ const View_cart_details = (props) => {
                                         <View>
                                             {item.product_name ? (
 
-                                                <Animatable.View animation={'fadeInDown'} style={{ alignSelf: 'center',margin:2 }}>
+                                                <Animatable.View animation={'fadeInDown'} style={{ alignSelf: 'center', margin: 2 }}>
                                                     <View key={index} style={{
                                                         width: responsiveWidth(98), flexDirection: 'row', alignItems: 'center', backgroundColor: '#ffffff', justifyContent: 'space-between', borderRadius: 10, marginTop: 5, padding: 6, shadowColor: "#000",
                                                         shadowOffset: {
@@ -245,19 +245,24 @@ const View_cart_details = (props) => {
                                                             <View style={{ flexDirection: 'column', justifyContent: 'space-between', width: responsiveWidth(40), marginLeft: 5 }}>
 
 
-                                                                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: responsiveWidth(30), padding: 5 }}>
+                                                                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: responsiveWidth(30), backgroundColor: '#f5f5f5', borderRadius: 30, elevation: 5, shadowColor: '#000' }}>
 
 
                                                                     <TouchableOpacity onPress={() => dec(item.id)} disabled={item.quantity == 1}>
                                                                         <View style={{
-                                                                            backgroundColor: '#E7EAEF', padding: 5, borderRadius: 5, alignSelf: 'center', alignItems: 'center', shadowColor: "#000",
-                                                                            shadowOffset: {
-                                                                                width: 0,
-                                                                                height: 2,
-                                                                            },
-                                                                            shadowOpacity: 0.25,
-                                                                            shadowRadius: 3.84,
-                                                                            elevation: 5,
+                                                                            // backgroundColor: '#E7EAEF',
+                                                                            padding: 5,
+                                                                            // borderRadius: 5,
+                                                                            alignSelf: 'center',
+                                                                            alignItems: 'center',
+                                                                            // shadowColor: "#000",
+                                                                            // shadowOffset: {
+                                                                            //     width: 0,
+                                                                            //     height: 2,
+                                                                            // },
+                                                                            // shadowOpacity: 0.25,
+                                                                            // shadowRadius: 3.84,
+                                                                            // elevation: 5,
                                                                         }}>
                                                                             <Icon name="minus" color='black' size={25} />
 
@@ -269,14 +274,19 @@ const View_cart_details = (props) => {
 
                                                                     <TouchableOpacity onPress={() => inc(item.id)} disabled={item.available_stock_quantity == item.quantity}>
                                                                         <View style={{
-                                                                            backgroundColor: '#E7EAEF', borderRadius: 5, alignSelf: 'center', alignItems: 'center', padding: 5, shadowColor: "#000",
-                                                                            shadowOffset: {
-                                                                                width: 0,
-                                                                                height: 2,
-                                                                            },
-                                                                            shadowOpacity: 0.25,
-                                                                            shadowRadius: 3.84,
-                                                                            elevation: 5,
+                                                                            // backgroundColor: '#E7EAEF',
+                                                                            // borderRadius: 5,
+                                                                            alignSelf: 'center',
+                                                                            alignItems: 'center',
+                                                                            padding: 5,
+                                                                            // shadowColor: "#000",
+                                                                            // shadowOffset: {
+                                                                            //     width: 0,
+                                                                            //     height: 2,
+                                                                            // },
+                                                                            // shadowOpacity: 0.25,
+                                                                            // shadowRadius: 3.84,
+                                                                            // elevation: 5,
                                                                         }}>
                                                                             <Icon name="plus" color='black' size={25} />
 

@@ -1,5 +1,5 @@
-import React,{useEffect,useState} from "react";
-import { View, Text, TouchableOpacity, SafeAreaView, TextInput, Image, ScrollView,BackHandler } from "react-native"
+import React, { useEffect, useState } from "react";
+import { View, Text, TouchableOpacity, SafeAreaView, TextInput, Image, ScrollView, BackHandler } from "react-native"
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import NavbarTop from "./navbar";
 import {
@@ -17,7 +17,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const Contact_us = () => {
     const navigation = useNavigation();
-const toast = useToast();
+    const toast = useToast();
     const contact_Api = async (value) => {
         var formData = new FormData();
         formData.append("full_name", value.full_name);
@@ -37,7 +37,7 @@ const toast = useToast();
                 body: formData
             }).then((result) => result.json())
                 .then((result) => {
-                    if (result.msg){
+                    if (result.msg) {
                         toast.show("Message sent successfully", {
                             type: "success",
                             placement: "top",
@@ -56,8 +56,8 @@ const toast = useToast();
             console.log('Try catch error', error)
         }
     }
-      //----------------------------------------------------------------------------------------
-      useEffect(() => {
+    //----------------------------------------------------------------------------------------
+    useEffect(() => {
         const backHandler = BackHandler.addEventListener(
             'hardwareBackPress',
             () => {
@@ -69,9 +69,9 @@ const toast = useToast();
         return () => backHandler.remove();
     }, [navigation]);
     return (
-        <SafeAreaView style={{flex:1,backgroundColor:'#fff'}}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
             <NavbarTop />
-            <ScrollView style={{paddingBottom:50}}>
+            <ScrollView style={{ paddingBottom: 50 }}>
                 <View>
                     <Animatable.View animation={'fadeIn'} style={{ marginTop: 30 }}>
                         <Text style={{ color: 'black', fontSize: responsiveFontSize(3), textAlign: 'center', fontWeight: 'bold' }}>Tell Us Your Message</Text>
@@ -174,17 +174,21 @@ const toast = useToast();
                     <View style={{ marginTop: 15 }}>
                         <View style={{ alignSelf: 'center', width: responsiveWidth(80), padding: 10 }}>
                             <Icon style={{ alignSelf: 'center' }} name='location-on' color='black' size={30} />
-                            <Text style={{ fontSize: responsiveFontSize(1.8), color: "#000", padding: 5, textAlign: 'center' }}>Office # FI 12 , Fifth Floor Mateen Shopping Galaxy Office Block, Main Rashid Minhas Road, Karachi</Text>
+                            <Text style={{ fontSize: responsiveFontSize(1.8), color: "#000", padding: 5, textAlign: 'center' }}>
+                                Address:
+                                Plot No. 1009/1, Kapra Gali, Adamjee Road, Landhi, Karachi.</Text>
                         </View>
                         <View style={{ alignSelf: 'center', width: responsiveWidth(80), padding: 10 }}>
                             <Icon style={{ alignSelf: 'center' }} name='local-phone' color='black' size={30} />
 
-                            <Text style={{ fontSize: responsiveFontSize(1.8), color: "#000", padding: 5, textAlign: 'center' }}>+92-311-3220024</Text>
+                            <Text style={{ fontSize: responsiveFontSize(1.8), color: "#000", padding: 5, textAlign: 'center' }}>03319998780</Text>
+                            <Text style={{ fontSize: responsiveFontSize(1.8), color: "#000", padding: 5, textAlign: 'center' }}>03203216788</Text>
+
                         </View>
                         <View style={{ alignSelf: 'center', width: responsiveWidth(80), padding: 10 }}>
                             <Icon style={{ alignSelf: 'center' }} name='email' color='black' size={30} />
 
-                            <Text style={{ fontSize: responsiveFontSize(1.8), color: "#000", padding: 5, textAlign: 'center' }}>info@foreeshop.com</Text>
+                            <Text style={{ fontSize: responsiveFontSize(1.8), color: "#000", padding: 5, textAlign: 'center' }}>ab.bismillahfabrics@gmail.com</Text>
                         </View>
                     </View>
                 </View>

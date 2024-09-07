@@ -111,7 +111,7 @@ const ForgetPassword = () => {
                         <TouchableOpacity onPress={handleSubmit} disabled={!isValid}>
                             <View style={{
                                 width: responsiveWidth(80),
-                                backgroundColor: isValid ? 'black' : 'gray',
+                                backgroundColor: isValid ? '#000' : '#708090',
                                 padding: 15,
                                 marginTop: 20,
                                 alignSelf: 'center',

@@ -95,7 +95,8 @@ const style = StyleSheet.create({
     logoImage: {
         resizeMode: 'contain',
         width: responsiveWidth(14),
-        height: responsiveHeight(7)
+        height: responsiveHeight(7),
+        
     },
 
 

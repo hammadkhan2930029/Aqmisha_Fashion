@@ -13,6 +13,7 @@ import About from './about';
 import Contact_us from './contact_us';
 import Deals from './deals';
 import Deals_detail from './deals_details';
+import Shop from './Shop';
 
 
 const Drawer = createDrawerNavigator();
@@ -33,6 +34,8 @@ const MyDrawer = () => {
             <Drawer.Screen name="contact" component={Contact_us} options={{ headerShown: false }} />
             <Drawer.Screen name="deals" component={Deals} options={{ headerShown: false }} />
             <Drawer.Screen name="deals_detail" component={Deals_detail} options={{ headerShown: false }} />
+            <Drawer.Screen name="shop" component={Shop} options={{ headerShown: false }} />
+
 
 
 

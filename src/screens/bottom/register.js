@@ -439,7 +439,7 @@ const Register = ({ props }) => {
                             <TouchableOpacity onPress={handleSubmit} disabled={!isValid}>
                                 <Animatable.View animation={'flipInY'} style={{
                                     width: responsiveWidth(95),
-                                    backgroundColor: isValid ? 'black' : 'gray',
+                                    backgroundColor: isValid ? '#000' : '#708090',
                                     padding: 15,
                                     marginTop: 20,
                                     borderRadius: 10,

@@ -1,7 +1,7 @@
 
 
 import React, { useState, useEffect } from "react";
-import { Text, View, SafeAreaView, Image, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { Text, View, SafeAreaView, Image, StyleSheet, TouchableOpacity, TextInput, ScrollView,BackHandler } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
@@ -16,12 +16,7 @@ import { useToast } from "react-native-toast-notifications";
 import AnimatedLoader from 'react-native-animated-loader';
 
 let user_update_form = object({
-    // first_name: string()
-    //     .required("First Name is Required.")
-    //     .min(1, "First Name is Too Short."),
-    // last_name: string()
-    //     .required("Last Name is Required.")
-    //     .min(1, "Last Name is Too Short."),
+  
     email: string()
         .email()
         .required("Email is Required."),
@@ -210,6 +205,19 @@ const Edit_Profile = (props) => {
             console.log('try_Catch_error', error);
         }
     };
+
+    // --------------------------------------------------------------
+     useEffect(() => {
+        const backHandler = BackHandler.addEventListener(
+            'hardwareBackPress',
+            () => {
+                navigation.navigate('main');
+                return true;
+            }
+        );
+
+        return () => backHandler.remove();
+    }, [navigation]);
 
     return (
         <SafeAreaView style={{ backgroundColor: '#fff', flex: 1 }}>
@@ -435,7 +443,7 @@ const Edit_Profile = (props) => {
                                 {/* --------------------------------------------------------------------------------- */}
                                 <TouchableOpacity  onPress={handleSubmit} style={{
                                     width: responsiveWidth(90),
-                                    backgroundColor: isValid ? 'black' : 'gray',
+                                    backgroundColor: isValid ? '#000' : '#708090',
                                     padding: 15,
                                     marginTop: 20,
                                     borderRadius: 10,

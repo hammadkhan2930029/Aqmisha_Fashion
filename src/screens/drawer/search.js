@@ -8,6 +8,8 @@ import {
 } from "react-native-responsive-dimensions";
 import NavbarTop from "./navbar";
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import * as Animatable from 'react-native-animatable';
+
 
 const Search = () => {
 
@@ -62,15 +64,15 @@ const Search = () => {
                 alignSelf: 'center',
                 justifyContent: 'center',
                 margin: 10,
-                backgroundColor: '#f5f5f5',
+                backgroundColor: '#fff',
                 borderRadius: 25,
                 shadowColor: "#000",
-                shadowOffset: {
-                    width: 0,
-                    height: 6,
-                },
-                shadowOpacity: 0.37,
-                shadowRadius: 7.49,
+                // shadowOffset: {
+                //     width: 0,
+                //     height: 6,
+                // },
+                // shadowOpacity: 0.37,
+                // shadowRadius: 7.49,
                 elevation: 12,
             }}>
 
@@ -103,27 +105,27 @@ const Search = () => {
                                             <TouchableOpacity activeOpacity={.8} onPress={() => navigation.navigate('productDetails', {
                                                 image: item.image,
                                                 product_name: item.product_name,
-                                                id: item.product_id,
                                                 details: item.description,
                                                 price: item.price,
                                                 weight: item.weight,
                                                 brand: item.brand_name,
-                                                unit: item.unit
-
+                                                unit: item.unit,
+                                                product_id: item.product_id
+        
                                             })}>
-                                                <View style={style.card} key={item.product_id}>
+                                                <Animatable.View animation={'fadeInUpBig'} style={style.card} key={index}>
                                                     <View style={style.cardView}>
-
-                                                        <Image style={{ resizeMode: 'contain', width: responsiveWidth(46), height: responsiveHeight(15), borderTopLeftRadius: 10, borderTopRightRadius: 10 }} source={{ uri: item.image }} />
+        
+                                                        <Image style={{ resizeMode: 'contain', width: responsiveWidth(46), height: responsiveHeight(35), borderRadius: 10 }} source={{ uri: item.image }} />
                                                     </View>
-                                                    <View style={{ padding: 10, height: responsiveHeight(15), borderBottomLeftRadius: 10, borderBottomRightRadius: 10, flexDirection: 'column', justifyContent: 'space-between' }}>
-
-                                                        <Text style={{ color: 'black', fontSize: responsiveFontSize(2), textAlign: 'center', fontWeight: '600' }}>{item.product_name} </Text>
-                                                        <Text style={{ color: 'black', fontSize: responsiveFontSize(2), textAlign: 'center' }}>{item.description.substring(0, 15) + '...'} </Text>
-
+                                                    <View style={{ padding: 10, height: responsiveHeight(11), borderBottomLeftRadius: 10, borderBottomRightRadius: 10, flexDirection: 'column', justifyContent: 'space-between' }}>
+        
+                                                        <Text style={{ color: 'black', fontSize: responsiveFontSize(2.1), textAlign: 'center', fontWeight: '500' }}>{item.product_name} </Text>
+        
+        
                                                         <Text style={{ color: 'orange', fontSize: responsiveFontSize(2.5), textAlign: 'center' }}>Rs.{item.price}</Text>
                                                     </View>
-                                                </View>
+                                                </Animatable.View>
                                             </TouchableOpacity>
                                         ) : (<Text style={{textAlign:'center',padding:10}}>data not found</Text>)}
                                     </View>
@@ -142,23 +144,18 @@ const Search = () => {
 const style = StyleSheet.create({
     card: {
 
-        backgroundColor: 'white',
+        backgroundColor: '#fff',
         width: responsiveWidth(46),
-        height: responsiveHeight(30),
+        height: responsiveHeight(46),
         margin: 7,
         borderRadius: 10,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
+
+
+
     },
     cardView: {
         width: responsiveWidth(46),
-        height: responsiveHeight(15),
+        height: responsiveHeight(35),
         borderRadius: 10,
         shadowColor: "#000",
         shadowOffset: {

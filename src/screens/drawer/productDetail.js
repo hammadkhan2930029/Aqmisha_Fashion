@@ -27,12 +27,12 @@ const ProductDetails = (props) => {
     // ------------------------
     const [colors, setcolors] = useState('');
     const [colorName, setColorName] = useState('');
-    const [colorID, setColorID] = useState('');
+    const [colorID, setColorID] = useState(0);
 
     // ------------------------
     const [product_Size, setproduct_Size] = useState('');
     const [size, setsize] = useState('');
-    const [size_ID, setsize_ID] = useState('0');
+    const [size_ID, setsize_ID] = useState(0);
     //------------------------------------
     const [update_price, setupdate_price] = useState('');
     const [available_quantity, setavailable_quantity] = useState('0');
@@ -46,7 +46,7 @@ const ProductDetails = (props) => {
     const toast = useToast();
     const [selectRadio, setSelectRadio] = useState('')
     const [selectRadio_color, setSelectRadio_color] = useState('')
-
+    const [click, setclick] = useState(false)
     //    -----------------redux-------------------------
     const randomNumber = useSelector(state => state.randomNumber.randomNumber);
     // -----------------------regex html tag converter-------------------------------------------------
@@ -56,7 +56,7 @@ const ProductDetails = (props) => {
         const cleanText = details.replace(/<\/?[^>]+(>|$)/g, '');
         setPlainText(cleanText);
     }, [details]);
-    // console.log('plain text',plainText)
+    // console.log('plain text', plainText)
 
     // ------------------AsyncStorage get data -------------------------
     const getMyObject = async () => {
@@ -82,7 +82,7 @@ const ProductDetails = (props) => {
             getAddtocart();
         }
     }, [user_id]);
-    console.log('user id', user_id)
+    // console.log('user id', user_id)
     //    ----------------------------------------------------------------------------------
 
     const inc = () => {
@@ -163,7 +163,7 @@ const ProductDetails = (props) => {
             const result = await response.json();
 
             if (result && result.msg) {
-                console.log('color result', result)
+                // console.log('color result', result)
 
                 setcolors(result.msg);
                 const noData = result.msg.map((item) => item.response);
@@ -241,11 +241,13 @@ const ProductDetails = (props) => {
         }
     };
 
-
     useEffect(() => {
-        stock_price();
+        if (product_id && colorID === 0 && size_ID === 0) {
+            stock_price();
+        }
 
-        if (colorID >= 0 || size_ID >= 0) {
+        // Dosra case: Jab colorID ya size_ID change ho jaye aur 0 se alag ho jaye
+        if (product_id && (colorID !== 0 || size_ID !== 0)) {
             stock_price();
         }
     }, [product_id, colorID, size_ID]);
@@ -292,7 +294,7 @@ const ProductDetails = (props) => {
     }, [navigation]);
 
     //-------------------------------------------------------------------------------------
-    console.log('no size',no_Sizedata)
+
 
     return (
         // ---------------Top Navbar-----------------
@@ -352,24 +354,31 @@ const ProductDetails = (props) => {
                     <Animatable.View animation={'slideInUp'} >
 
                         <View style={{ width: responsiveWidth(95), flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', alignSelf: 'center', margin: 8 }}>
-                            <View style={{ width: responsiveWidth(70) }}>
+                            <View style={{ width: responsiveWidth(65) }}>
 
-                                <Text style={{ color: 'black', fontSize: responsiveFontSize(3.5), fontWeight: 'bold',padding: 5 }}>{product_name}</Text>
+                                <Text style={{ color: 'black', fontSize: responsiveFontSize(3.5), fontWeight: 'bold', padding: 5 }}>{product_name}</Text>
                             </View>
-                            <View style={{ width: responsiveWidth(25) }}>
+                            <View style={{ width: responsiveWidth(30) }}>
 
-                                <Text style={{ color: '#DD8560', fontSize: responsiveFontSize(2.8), fontWeight: 'bold', padding: 5 }}>Rs.{!update_price ? price * quantity : update_price * quantity}</Text>
+                                <Text style={{ color: '#DD8560', fontSize: responsiveFontSize(2.7), fontWeight: 'bold', padding: 5, textAlign: 'center' }}>Rs.{!update_price ? price * quantity : update_price * quantity}</Text>
                             </View>
 
 
                         </View>
-                        <View style={{ width: responsiveWidth(90), flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', alignSelf: 'center' }}>
-                            <View style={{width:responsiveWidth(70)}}>
+                        <View style={{ width: responsiveWidth(95), flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', alignSelf: 'center' }}>
+                            <View style={{ width: responsiveWidth(70) }}>
                                 <Text style={{ color: 'black', fontSize: responsiveFontSize(2.5), padding: 5 }}>{brand}</Text>
-                                <Text style={{ color: 'black', fontSize: responsiveFontSize(2.5), padding: 5 }}>{plainText}</Text>
+                                <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }} onPress={() => setclick(!click)}>
+                                    <Text style={{ color: '#000', fontSize: responsiveFontSize(2.5), padding: 5 }}>Details</Text>
+                                    <Icon name={click ? "arrow-down-drop-circle" : "arrow-down-drop-circle-outline"} size={20} color="#000" />
+                                </TouchableOpacity>
+                                {click && (
+
+                                    <Text style={{ color: 'black', fontSize: responsiveFontSize(2.5), padding: 5 }}>{plainText}</Text>
+                                )}
 
                             </View>
-                            <View style={{width:responsiveWidth(20)}}>
+                            <View style={{ width: responsiveWidth(20) }}>
                                 {viewCartData && viewCartData > 0 ? (
 
                                     <TouchableOpacity activeOpacity={.8} onPress={() => navigation.navigate('view_cart_details')}>
@@ -406,7 +415,7 @@ const ProductDetails = (props) => {
                                         </View>
                                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                                             {product_Size && product_Size.map((item, index) => {
-                                                console.log(item)
+                                                console.log('hammad', item)
                                                 return (
                                                     <View >
 
@@ -419,31 +428,19 @@ const ProductDetails = (props) => {
 
 
                                                             }}>
-                                                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
 
-                                                                {/* <View style={{ borderColor: '#000', borderWidth: 1, width: responsiveWidth(8), height: responsiveHeight(4), borderRadius: 30, margin: 5 }}>
-                                                                    {selectRadio == item.size_id ? (
-                                                                        <View style={{ backgroundColor: '#000', width: responsiveWidth(6), height: responsiveHeight(3), borderRadius: 30, alignSelf: 'center', alignItems: 'center', justifyContent: 'center', margin: 3 }}></View>
 
-                                                                    ) : null}
-                                                                </View> */}
-                                                                <View style={{
-                                                                    // width: responsiveWidth(8),
-                                                                    // width: responsiveWidth(8),
+                                                            <View style={{
+                                                                height: responsiveHeight(4),
+                                                                backgroundColor: selectRadio == item.size_id ? '#000' : null,
+                                                                borderRadius: 50,
+                                                                alignSelf: 'center',
+                                                                marginLeft: 5,
 
-                                                                    height: responsiveHeight(4),
-                                                                    backgroundColor: selectRadio == item.size_id ? '#000' : null,
-                                                                    borderRadius: 50,
-                                                                    alignSelf: 'center',
-                                                                    marginLeft: 5,
-                                                                    padding: 6,
+                                                            }}>
 
-                                                                }}>
+                                                                <Text style={{ color: selectRadio == item.size_id ? '#fff' : '#000', fontSize: responsiveFontSize(2), textAlign: 'center', padding: 6 }}> {item.size_name}</Text>
 
-                                                                    {/* <Text style={{ color: selectRadio == item.size_id ? '#fff' : '#000', fontSize: responsiveFontSize(2), textAlign: 'center' }}> {item.size_name === 'Standard' ? 'std' : item.size_name === 'Medium' ? 'M' : item.size_name == 'Large' ? 'X' : item.size_name}</Text> */}
-                                                                    <Text style={{ color: selectRadio == item.size_id ? '#fff' : '#000', fontSize: responsiveFontSize(2), textAlign: 'center' }}> {item.size_name}</Text>
-
-                                                                </View>
                                                             </View>
 
                                                         </TouchableOpacity>
@@ -466,44 +463,38 @@ const ProductDetails = (props) => {
                                             <Text style={{ color: 'black', fontSize: responsiveFontSize(2) }}>Color :</Text>
                                         </View>
 
-                                        <View>
+                                        <View style={{ flexDirection: 'row', alignItems: 'center', }}>
+                                            {colors && colors.map((item) => {
+                                                return (
+                                                    <View >
+                                                        <TouchableOpacity
+                                                            onPress={() => {
+                                                                setColorName(item.color_name);
+                                                                setColorID(item.color_id)
+                                                                setSelectRadio_color(item.color_id)
+                                                            }}>
+                                                            <View style={{
+                                                                backgroundColor: selectRadio_color == item.color_id ? "#000" : null,
+
+
+                                                                borderRadius: 50,
+
+                                                                marginTop: 5,
+                                                                marginLeft: 5
+                                                            }}>
 
 
 
-                                            {
+                                                                <Text style={{ color: selectRadio_color == item.color_id ? '#fff' : '#000', fontSize: responsiveFontSize(2), padding: 6 }}>{item.color_name + " "}</Text>
+                                                            </View>
 
-                                                colors && colors.map((item) => {
-                                                    return (
-                                                        <View >
-                                                            <TouchableOpacity
-                                                                onPress={() => {
-                                                                    setColorName(item.color_name);
-                                                                    setColorID(item.color_id)
-                                                                    setSelectRadio_color(item.color_id)
-                                                                }}>
-                                                                <View style={{
-                                                                    backgroundColor: selectRadio_color == item.color_id ? "#000" : null,
-                                                                    flexDirection: 'row',
-                                                                    alignItems: 'center',
-                                                                    borderRadius: 50,
-                                                                    padding: 5,
-                                                                    marginTop: 5
-                                                                }}>
+                                                        </TouchableOpacity>
+                                                    </View>
 
+                                                )
+                                            })
 
-
-                                                                    <Text style={{ color: selectRadio_color == item.color_id ? '#fff' : '#000', fontSize: responsiveFontSize(2) }}>{item.color_name}</Text>
-                                                                </View>
-
-                                                            </TouchableOpacity>
-                                                        </View>
-
-                                                    )
-                                                })
-
-                                            }
-
-                                        </View>
+                                            }</View>
                                     </View>
                                 )}
                             </View>
@@ -563,15 +554,28 @@ const ProductDetails = (props) => {
                                         </View>
                                     </TouchableOpacity>
                                 ) : (
-                                    <Animatable.View animation={'slideInLeft'} style={{
-                                        flexDirection: 'row', alignItems: 'center', backgroundColor: '#000',
-                                        padding: 10, borderRadius: 50,
+                                    <View style={{
+                                         backgroundColor: '#708090',
+                                         borderRadius: 50,
                                     }}>
-                                        <Icon name="plus" color="white" size={22} />
-                                        <Text style={{ color: 'white', marginLeft: 5, fontSize: responsiveFontSize(2.4) }}>
-                                            Add to Cart
-                                        </Text>
-                                    </Animatable.View>
+
+                                        {no_Sizedata == 'no data' ? (
+
+                                            <Text style={{ color: 'white', marginLeft: 5, fontSize: responsiveFontSize(2.4),padding:10 }}>
+                                                Stock not available
+                                            </Text>
+                                        ) : (
+                                            <View style={{
+                                                flexDirection: 'row', alignItems: 'center', backgroundColor: '#708090',
+                                                padding: 10, borderRadius: 50,
+                                            }}>
+                                                <Icon name="plus" color="white" size={22} />
+                                                <Text style={{ color: 'white', marginLeft: 5, fontSize: responsiveFontSize(2.4) }}>
+                                                    Add to Cart
+                                                </Text>
+                                            </View>
+                                        )}
+                                    </View>
                                 )}
                             </View>
                         </View>

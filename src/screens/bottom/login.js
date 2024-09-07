@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, SafeAreaView, TextInput, Modal, TouchableOpacity, StatusBar, BackHandler, Platform, KeyboardAvoidingView, } from 'react-native';
+import { Text, View, SafeAreaView, TextInput, Modal, TouchableOpacity, StatusBar, BackHandler, Platform, KeyboardAvoidingView,ScrollView } from 'react-native';
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useNavigation } from '@react-navigation/native';
 import {
@@ -75,24 +75,7 @@ const LogIn = () => {
         getMyObject();
 
     }, []);
-    // ----------------------------------------------------------------
-    console.log('user id',user_id)
 
-    // useEffect(() => {
-    //     if (user_id) {
-    //         console.log('profile');
-    //         navigation.replace('profile');
-
-    //     } else {
-    //         console.log('login');
-
-
-    //     }
-    //     setTimeout(() => {
-
-    //         setvisible(false)
-    //     }, 500);
-    // }, [user_id]);
 
     // --------------AysncStorage Set Data------------------------
     const setObjectValue = async (value) => {
@@ -180,19 +163,11 @@ const LogIn = () => {
                 showHideTransition={'fade'}
 
             />
-            {/* <TouchableOpacity activeOpacity={.5} onPress={() => navigation.navigate('main')}>
-                <View style={{
-                    marginTop: 30,
-                    marginLeft: 10
-
-                }}>
-                    <AnotherIcon name='arrow-back' size={30} color='gray' />
-                </View>
-            </TouchableOpacity> */}
+           
 
 
-            <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}>
-                {/* <ScrollView> */}
+            {/* <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}> */}
+                <ScrollView>
 
                 <Formik
                     initialValues={{ email: '', password: '' }}
@@ -259,7 +234,7 @@ const LogIn = () => {
                             <TouchableOpacity disabled={!isValid} onPress={handleSubmit}>
                                 <Animatable.View animation={'slideInLeft'} style={{
                                     width: responsiveWidth(80),
-                                    backgroundColor: isValid ? 'black' : 'gray',
+                                    backgroundColor: isValid ? '#000' : '#708090',
                                     padding: 15,
                                     marginTop: 20,
                                     alignSelf: 'center',
@@ -290,8 +265,8 @@ const LogIn = () => {
                 </Formik>
 
 
-                {/* </ScrollView> */}
-            </KeyboardAvoidingView>
+                </ScrollView>
+            {/* </KeyboardAvoidingView> */}
 
 
         </SafeAreaView>

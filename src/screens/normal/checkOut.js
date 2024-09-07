@@ -464,7 +464,6 @@ const Checkout = (props) => {
                             resetForm();
 
                         }}
-                    // validationSchema={checkout_form}
                     >
                         {({ handleBlur, handleChange, values, touched, errors, isValid, handleSubmit }) => (
 
@@ -489,7 +488,6 @@ const Checkout = (props) => {
                                                 onBlur={handleBlur('first_name')}
                                                 editable={dis}
                                             />
-                                            {/* {(errors.first_name && touched.first_name) && <Text style={{ color: 'red', padding: 5 }}>{errors.first_name}</Text>} */}
                                             <TextInput
 
                                                 style={style.inputstyle}
@@ -502,10 +500,8 @@ const Checkout = (props) => {
                                                 editable={dis}
 
                                             />
-                                            {/* {(errors.last_name && touched.last_name) && <Text style={{ color: 'red', padding: 5 }}>{errors.last_name}</Text>} */}
                                         </View>
 
-                                        {/* {(errors.address && touched.address) && <Text style={{ color: 'red', padding: 5 }}>{errors.address}</Text>} */}
                                         <View>
                                             <TextInput
                                                 style={style.inputstyle}
@@ -516,7 +512,6 @@ const Checkout = (props) => {
                                                 onChangeText={handleChange('email')}
                                                 onBlur={handleBlur('email')}
                                             />
-                                            {/* {(errors.email && touched.email) && <Text style={{ color: 'red', padding: 5 }}>{errors.email}</Text>} */}
                                         </View>
                                         <View>
                                             <TextInput
@@ -529,7 +524,6 @@ const Checkout = (props) => {
                                                 onChangeText={handleChange('mobile_no')}
                                                 onBlur={handleBlur('mobile_no')}
                                             />
-                                            {/* {(errors.mobile_no && touched.mobile_no) && <Text style={{ color: 'red', padding: 5 }}>{errors.mobile_no}</Text>} */}
                                         </View>
                                         <View>
                                             <TextInput
@@ -650,7 +644,7 @@ const Checkout = (props) => {
                                 <TouchableOpacity onPress={handleSubmit}>
                                     <Animatable.View animation={'flipInY'} style={{
                                         width: responsiveWidth(95),
-                                        backgroundColor: isValid ? 'black' : 'gray',
+                                        backgroundColor: isValid ? '#000' : '#708090',
                                         padding: 15,
                                         flexDirection: 'row',
                                         alignItems: 'center',

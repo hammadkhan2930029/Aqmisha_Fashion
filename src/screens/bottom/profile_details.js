@@ -25,7 +25,7 @@ const Profile_details = (props) => {
         const backHandler = BackHandler.addEventListener(
             'hardwareBackPress',
             () => {
-                navigation.navigate('profile');
+                navigation.navigate('main');
                 return true;
             }
         );
@@ -55,7 +55,7 @@ const Profile_details = (props) => {
 
     }, []);
 
-    console.log("user", user)
+    // console.log("user", user)
 
 
 
@@ -102,7 +102,7 @@ const Profile_details = (props) => {
                 padding: 5,
                 elevation: 5,
             }}>
-                <TouchableOpacity activeOpacity={.5} onPress={() => navigation.navigate('profile')}>
+                <TouchableOpacity activeOpacity={.5} onPress={() => navigation.navigate('main')}>
                     <View style={styles.icon}>
                         <AnotherIcon name='keyboard-arrow-left' size={30} color='#000' />
                     </View>
