@@ -164,15 +164,12 @@ const Home = ({ props }) => {
                 </View>
 
                 <View >
-                    <Image style={{ resizeMode: 'contain', width: responsiveWidth(80), height: 400, alignSelf: 'center' }} source={require('../../assets/collection-one.png')} />
+                    <Image style={{ resizeMode: 'stretch', width: responsiveWidth(100), alignSelf: 'center' }} source={require('../../assets/collection-one.png')} />
                 </View>
                 {/* -------------------------------On Sale------------------------------------- */}
-                <View>
-                    <View style={{flexDirection:'row',alignItems:'center'}}>
-
-                    <Text style={{ color: 'black', textAlign: 'center', fontSize: 24, marginTop: 40 }}>On Sale</Text>
-                    <Image source={require('../../NewAssets/apperal/Tag.png')} />
-
+                <View style={{ marginTop: 20 }}>
+                    <View >
+                        <Text style={{ color: 'black', textAlign: 'center', fontSize: responsiveFontSize(3.5), }}>On Sale</Text>
                     </View>
                     <View style={{ alignSelf: 'center', margin: 10 }}>
                         <Image source={require('../../NewAssets/line.png')} />
@@ -214,19 +211,19 @@ const Home = ({ props }) => {
 
                                                     <Text style={{ color: 'black', textAlign: 'center', fontSize: responsiveFontSize(3), fontWeight: '600' }}>{item.product_name}</Text>
                                                 </View>
-                                                <View style={{flexDirection:'row',alignItems:'center',alignSelf:'center'}}>
+                                                <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'center' }}>
 
-                                                    <Text style={{ color: "lightgray", fontSize: responsiveFontSize(3), textAlign: 'center', margin: 5, fontWeight: '700' , textDecorationLine: 'line-through',}}>Rs.{item.price}</Text>
+                                                    <Text style={{ color: "lightgray", fontSize: responsiveFontSize(3), textAlign: 'center', margin: 5, fontWeight: '700', textDecorationLine: 'line-through', }}>Rs.{item.price}</Text>
                                                     <Text style={{ color: "orange", fontSize: responsiveFontSize(3), textAlign: 'center', margin: 5, fontWeight: '700' }}>Rs.{item.price - item.sale_price}</Text>
 
 
                                                 </View>
                                                 <View>
-                                                
 
-                                                        <Text style={{ color: "gray", fontSize: responsiveFontSize(2), textAlign: 'center', margin: 5, }}>{"Rs." + item.sale_price + ' OFF'}</Text>
 
-                                                    
+                                                    <Text style={{ color: "gray", fontSize: responsiveFontSize(2), textAlign: 'center', margin: 5, }}>{"Rs." + item.sale_price + ' OFF'}</Text>
+
+
                                                 </View>
 
                                             </View>
@@ -243,7 +240,7 @@ const Home = ({ props }) => {
 
                 {/* -------------------------------New Arrivals------------------------------------- */}
                 <View>
-                    <Text style={{ color: 'black', textAlign: 'center', fontSize: 24, marginTop: 40 }}>New Arrival</Text>
+                    <Text style={{ color: 'black', textAlign: 'center', fontSize: responsiveFontSize(3.5), marginTop: 40 }}>New Arrival</Text>
                     <View style={{ alignSelf: 'center', margin: 10 }}>
                         <Image source={require('../../NewAssets/line.png')} />
                     </View>
@@ -296,7 +293,7 @@ const Home = ({ props }) => {
 
                 {/* ------------------------Featured---------------------------------------- */}
                 <View>
-                    <Text style={{ color: 'black', textAlign: 'center', fontSize: 24, marginTop: 40 }}>Featured</Text>
+                    <Text style={{ color: 'black', textAlign: 'center', fontSize: responsiveFontSize(3.5), marginTop: 40 }}>Featured</Text>
                     <View style={{ alignSelf: 'center', margin: 10 }}>
                         <Image source={require('../../NewAssets/line.png')} />
                     </View>
