@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaView, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { SafeAreaView, Text, View, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import {
     responsiveFontSize, responsiveHeight, responsiveWidth
@@ -25,7 +25,7 @@ export const Sub_category = (props) => {
 
     const subCategory = async () => {
         try {
-            const response = await fetch(`https://demo.cogentecommerce.com/api/view_data_api.php?view=sub-category&category_id=${category_id}`)
+            const response = await fetch(`https://aqmishafashion.online/api/view_data_api.php?view=sub-category&category_id=${category_id}`)
             const res = await response.json()
                 .then((res) => {
 
@@ -64,7 +64,7 @@ export const Sub_category = (props) => {
             {isloaded ? (<ActivityIndicator size="large" color="#0000ff" />) : (
                 <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', width: responsiveWidth(100) }}>
                     {subCatData?.map((item, index) => {
-                        // console.log(item)
+                        console.log('sub-cat', item)
 
                         return (
                             <TouchableOpacity activeOpacity={.6} disabled={item.response == 'no data'} onPress={() => navigation.navigate('sub_sub_category', {
@@ -84,10 +84,14 @@ export const Sub_category = (props) => {
                                         shadowRadius: 3.84,
                                         elevation: 5,
                                         alignSelf: 'center',
-                                        padding: 10
+                                        // padding: 10
                                     }}>
+                                        {item.sub_category_name == "Abaya" ? (
+                                            <Image style={{width:responsiveWidth(16),height:responsiveHeight(8)}} source={require('../../NewAssets/abaya.png')}/>
+                                        ) : (
 
-                                        <Icon style={{ alignSelf: 'center' }} name={item.sub_category_name == 'Women' ? 'woman' :'error-outline'} color='black' size={40} />
+                                            <Icon style={{ alignSelf: 'center' }} name='error-outline' color='black' size={40} />
+                                        )}
                                     </View>
 
                                     <Text style={{ fontSize: responsiveFontSize(2), color: 'black', fontWeight: '600', textAlign: 'center' }}>{item.sub_category_name || 'data not found'}</Text>

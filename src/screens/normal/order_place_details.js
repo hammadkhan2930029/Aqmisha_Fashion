@@ -10,12 +10,15 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AnotherIcon from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
+import AnimatedLoader from 'react-native-animated-loader';
 
 
 const Orderplace_details = (props) => {
     const navigation = useNavigation();
     // ---------------------------------------------------
     const [user_id, setuser_id] = useState(null);
+    const [visible, setVisible] = useState(true);
+
 
     const getMyObject = async () => {
         try {
@@ -48,12 +51,15 @@ const Orderplace_details = (props) => {
 
     const view_order = async () => {
         try {
-            let url = `https://demo.cogentecommerce.com/api/order_api.php?order=view-orders&user_id=${user_id}`
+            let url = `https://aqmishafashion.online/api/order_api.php?order=view-orders&user_id=${user_id}`
             const respons = await fetch(url)
             const result = await respons.json()
                 .then((result) => {
                     setDetails(result.msg)
                     console.log(result.msg)
+                    if (result.msg) {
+                        setVisible(false)
+                    }
                 }).catch(error => console.log(error))
 
 
@@ -74,13 +80,18 @@ const Orderplace_details = (props) => {
 
     const [order_details, setOrder_details] = useState()
     const view_order_details = async (order_id) => {
+        setVisible(true)
+
         try {
-            let url = `https://demo.cogentecommerce.com/api/order_api.php?order=view-order-detail&order_id=${order_id}`
+            let url = `https://aqmishafashion.online/api/order_api.php?order=view-order-detail&order_id=${order_id}`
             const respons = await fetch(url)
             const result = await respons.json()
                 .then((result) => {
                     setOrder_details(result.order_detail)
                     console.log(result)
+                    if (result.order_detail) {
+                        setVisible(false)
+                    }
                 }).catch(error => console.log(error))
 
         } catch (error) {
@@ -111,7 +122,19 @@ const Orderplace_details = (props) => {
     }, [navigation]);
 
     return (
+
         <SafeAreaView style={{ backgroundColor: '#F8F8FF', flex: 1 }}>
+            {/* --------------------------------------------- */}
+            <AnimatedLoader
+                visible={visible}
+                overlayColor="rgba(255,255,255,0.95)"
+                animationStyle={{ width: 100, height: 100, }}
+                speed={1}>
+                <Text>Loading...</Text>
+            </AnimatedLoader>
+
+            {/* --------------------------------------------- */}
+
             <StatusBar
                 animated={true}
                 backgroundColor='#fff'
@@ -119,6 +142,8 @@ const Orderplace_details = (props) => {
                 showHideTransition={'fade'}
 
             />
+
+            {/* -------------------------------------------------- */}
             <Animatable.View animation={'slideInLeft'} style={{
                 width: responsiveWidth(100), backgroundColor: '#ffffff', shadowColor: "#000",
                 shadowOffset: {
@@ -143,7 +168,7 @@ const Orderplace_details = (props) => {
                         refreshing={refresh}
                         onRefresh={() => pullme()} />
                 }
-               
+
             >
 
 
@@ -202,7 +227,7 @@ const Orderplace_details = (props) => {
                     {!order_details ? null : (<Text style={{ padding: 10, textAlign: 'center', color: '#000', fontSize: responsiveFontSize(3), fontWeight: '600' }}>Order details</Text>)}
                 </View>
 
-                <View style={{ marginBottom: 10,}}>
+                <View style={{ marginBottom: 10, }}>
                     {order_details?.map((item, index) => {
                         return (
                             <Animatable.View animation={'bounceInLeft'} key={index} style={{
@@ -218,19 +243,19 @@ const Orderplace_details = (props) => {
                                 elevation: 5,
                             }}>
                                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                                    <View>
+                                    <View style={{ width: responsiveWidth(65) }}>
 
                                         <Text style={{ fontSize: responsiveFontSize(2.5), color: '#000' }}>{"Product : " + item.product_name}</Text>
-                                        <Text style={{ fontSize: responsiveFontSize(2), color: 'gray' }}>{"Quantity : " + item.quantity}</Text>
+                                        <Text style={{ fontSize: responsiveFontSize(2.2), color: 'gray' }}>{"Quantity : " + item.quantity}</Text>
                                     </View>
-                                    <View>
+                                    <View style={{ width: responsiveWidth(20) }}>
 
-                                        <Image style={{ width: responsiveWidth(15), height: responsiveHeight(7), borderRadius: 10 }} source={{ uri: item.product_image }} />
+                                        <Image style={{ width: responsiveWidth(20), height: responsiveHeight(10), borderRadius: 10 }} source={{ uri: item.product_image }} />
                                     </View>
                                 </View>
                                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 15 }}>
-                                    <Text style={{ fontSize: responsiveFontSize(2), color: 'gray' }} >{"Weight : " + item.product_weight}</Text>
-                                    <Text style={{ fontSize: responsiveFontSize(2), color: 'orange' }}>{"Price : " + item.product_price * item.quantity}</Text>
+                                    <Text style={{ fontSize: responsiveFontSize(2.2), color: 'gray' }} >{"Weight : " + item.product_weight}</Text>
+                                    <Text style={{ fontSize: responsiveFontSize(2.2), color: 'orange' }}>{"Price : " + item.product_price * item.quantity}</Text>
                                 </View>
 
                             </Animatable.View>

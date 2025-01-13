@@ -86,7 +86,7 @@ const Register = ({ props }) => {
 
         try {
 
-            const url = 'https://demo.cogentecommerce.com/api/view_data_api.php?view=country';
+            const url = 'https://aqmishafashion.online/api/view_data_api.php?view=country';
             const countryApirespons = await fetch(url)
             const result = await countryApirespons.json()
                 .then((result) => {
@@ -110,7 +110,7 @@ const Register = ({ props }) => {
 
     const getCity = async (country_id) => {
 
-        const url = `https://demo.cogentecommerce.com/api/view_data_api.php?view=city&country_id=${country_id}`;
+        const url = `https://aqmishafashion.online/api/view_data_api.php?view=city&country_id=${country_id}`;
         let cityApirespons = await fetch(url);
         cityApirespons = await cityApirespons.json();
         console.log(cityApirespons.msg);
@@ -142,7 +142,7 @@ const Register = ({ props }) => {
             formData.append('address', values.address);
 
 
-            const url = 'https://demo.cogentecommerce.com/api/user_api.php?user=register'
+            const url = 'https://aqmishafashion.online/api/user_api.php?user=register'
             await fetch(url, {
                 method: 'POST',
                 headers: {
@@ -439,7 +439,7 @@ const Register = ({ props }) => {
                             <TouchableOpacity onPress={handleSubmit} disabled={!isValid}>
                                 <Animatable.View animation={'flipInY'} style={{
                                     width: responsiveWidth(95),
-                                    backgroundColor: isValid ? 'black' : 'gray',
+                                    backgroundColor: isValid ? '#000' : '#708090',
                                     padding: 15,
                                     marginTop: 20,
                                     borderRadius: 10,

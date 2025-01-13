@@ -35,7 +35,7 @@ const ForgetPassword = () => {
        
 
 
-        const url = 'https://demo.cogentecommerce.com/api/user_api.php?user=forgot_password'
+        const url = 'https://aqmishafashion.online/api/user_api.php?user=forgot_password'
         await fetch(url, {
             method: 'POST',
             headers: {
@@ -111,7 +111,7 @@ const ForgetPassword = () => {
                         <TouchableOpacity onPress={handleSubmit} disabled={!isValid}>
                             <View style={{
                                 width: responsiveWidth(80),
-                                backgroundColor: isValid ? 'black' : 'gray',
+                                backgroundColor: isValid ? '#000' : '#708090',
                                 padding: 15,
                                 marginTop: 20,
                                 alignSelf: 'center',

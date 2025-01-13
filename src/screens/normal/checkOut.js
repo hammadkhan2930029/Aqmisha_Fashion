@@ -117,7 +117,7 @@ const Checkout = (props) => {
     const getAddtocart = async () => {
         setIsloaded(true)
         try {
-            const url = `https://demo.cogentecommerce.com/api/cart_api.php?cart=cart-products&user_id=${user_id}`;
+            const url = `https://aqmishafashion.online/api/cart_api.php?cart=cart-products&user_id=${user_id}`;
             let response = await fetch(url)
             let result = await response.json()
                 .then((result) => {
@@ -170,7 +170,7 @@ const Checkout = (props) => {
 
         try {
 
-            const url = 'https://demo.cogentecommerce.com/api/view_data_api.php?view=country';
+            const url = 'https://aqmishafashion.online/api/view_data_api.php?view=country';
             const countryApirespons = await fetch(url)
             const result = await countryApirespons.json()
                 .then((result) => {
@@ -193,7 +193,7 @@ const Checkout = (props) => {
     const getCity = async (country_id) => {
         try {
 
-            const url = `https://demo.cogentecommerce.com/api/view_data_api.php?view=city&country_id=${country_id}`;
+            const url = `https://aqmishafashion.online/api/view_data_api.php?view=city&country_id=${country_id}`;
             let cityApirespons = await fetch(url);
             const result = await cityApirespons.json()
                 .then((result) => {
@@ -211,7 +211,7 @@ const Checkout = (props) => {
 
     const shippingFee = async () => {
         try {
-            const url = `https://demo.cogentecommerce.com/api/view_data_api.php?view=get-shipping-fee&country_id=${country.id}&city_id=${city.id}&total_weight=${grandWeight}&sub_total_amount=${sub_Total}`
+            const url = `https://aqmishafashion.online/api/view_data_api.php?view=get-shipping-fee&country_id=${country.id}&city_id=${city.id}&total_weight=${grandWeight}&sub_total_amount=${sub_Total}`
             const response = await fetch(url)
             const result = response.json()
                 .then((result) => {
@@ -257,7 +257,7 @@ const Checkout = (props) => {
         formData.append('GrandWeight', grandWeight)
 
         try {
-            const url = `https://demo.cogentecommerce.com/api/order_api.php?order=checkout`
+            const url = `https://aqmishafashion.online/api/order_api.php?order=checkout`
             await fetch(url, {
                 method: 'post',
                 headers: {
@@ -464,7 +464,6 @@ const Checkout = (props) => {
                             resetForm();
 
                         }}
-                    // validationSchema={checkout_form}
                     >
                         {({ handleBlur, handleChange, values, touched, errors, isValid, handleSubmit }) => (
 
@@ -489,7 +488,6 @@ const Checkout = (props) => {
                                                 onBlur={handleBlur('first_name')}
                                                 editable={dis}
                                             />
-                                            {/* {(errors.first_name && touched.first_name) && <Text style={{ color: 'red', padding: 5 }}>{errors.first_name}</Text>} */}
                                             <TextInput
 
                                                 style={style.inputstyle}
@@ -502,10 +500,8 @@ const Checkout = (props) => {
                                                 editable={dis}
 
                                             />
-                                            {/* {(errors.last_name && touched.last_name) && <Text style={{ color: 'red', padding: 5 }}>{errors.last_name}</Text>} */}
                                         </View>
 
-                                        {/* {(errors.address && touched.address) && <Text style={{ color: 'red', padding: 5 }}>{errors.address}</Text>} */}
                                         <View>
                                             <TextInput
                                                 style={style.inputstyle}
@@ -516,7 +512,6 @@ const Checkout = (props) => {
                                                 onChangeText={handleChange('email')}
                                                 onBlur={handleBlur('email')}
                                             />
-                                            {/* {(errors.email && touched.email) && <Text style={{ color: 'red', padding: 5 }}>{errors.email}</Text>} */}
                                         </View>
                                         <View>
                                             <TextInput
@@ -529,7 +524,6 @@ const Checkout = (props) => {
                                                 onChangeText={handleChange('mobile_no')}
                                                 onBlur={handleBlur('mobile_no')}
                                             />
-                                            {/* {(errors.mobile_no && touched.mobile_no) && <Text style={{ color: 'red', padding: 5 }}>{errors.mobile_no}</Text>} */}
                                         </View>
                                         <View>
                                             <TextInput
@@ -650,7 +644,7 @@ const Checkout = (props) => {
                                 <TouchableOpacity onPress={handleSubmit}>
                                     <Animatable.View animation={'flipInY'} style={{
                                         width: responsiveWidth(95),
-                                        backgroundColor: isValid ? 'black' : 'gray',
+                                        backgroundColor: isValid ? '#000' : '#708090',
                                         padding: 15,
                                         flexDirection: 'row',
                                         alignItems: 'center',

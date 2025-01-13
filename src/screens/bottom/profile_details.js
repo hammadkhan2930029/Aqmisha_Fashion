@@ -55,7 +55,7 @@ const Profile_details = (props) => {
 
     }, []);
 
-    console.log("user", user)
+    // console.log("user", user)
 
 
 

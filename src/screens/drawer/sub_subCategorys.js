@@ -46,12 +46,12 @@ export const Sub_subCategory = (props) => {
     const sub_subCategory = async () => {
 
         try {
-            const response = await fetch(`https://demo.cogentecommerce.com/api/view_data_api.php?view=sub-sub-category&category_id=${category_id}&sub_category_id=${sub_category_id}`)
+            const response = await fetch(`https://aqmishafashion.online/api/view_data_api.php?view=sub-sub-category&category_id=${category_id}&sub_category_id=${sub_category_id}`)
             const res = await response.json()
                 .then((res) => {
                     const sub_sub_id = res.msg.map((item) => +item.sub_sub_category_id)
                     setSub_subCatData(res.msg)
-                    console.log('res', res.msg)
+                    console.log('sub sub cat', res)
                     setid(sub_sub_id)
                 }).catch(error => console.log(error))
 
@@ -64,11 +64,12 @@ export const Sub_subCategory = (props) => {
     useEffect(() => {
         sub_subCategory()
     }, [sub_category_id])
+    console.log('id', id, 'subcatpgry id', sub_category_id, 'category id', category_id, 'brandData', brandData)
     // ------------------brand Api--------------------
     const brandApi = async () => {
         try {
 
-            const response = await fetch(`https://demo.cogentecommerce.com/api/view_data_api.php?view=brand`)
+            const response = await fetch(`https://aqmishafashion.online/api/view_data_api.php?view=brand`)
             const result = await response.json()
                 .then((result) => {
                     result.msg.map((item) => {
@@ -92,11 +93,11 @@ export const Sub_subCategory = (props) => {
 
         try {
 
-            const response = await fetch(`https://demo.cogentecommerce.com/api/view_data_api.php?view=products&category_id=${category_id}&sub_category_id=${sub_category_id}&sub_sub_category_id=${id}&brand_id=${brandData}`)
+            const response = await fetch(`https://aqmishafashion.online/api/view_data_api.php?view=products&category_id=${category_id}&sub_category_id=${sub_category_id}&sub_sub_category_id=${id}&brand_id=${brandData}`)
 
             const result = await response.json()
                 .then((result) => {
-                    console.log(result.msg)
+                    console.log('product', result)
                     setProductData(result.msg);
                     setIsloaded(false)
 
@@ -120,7 +121,7 @@ export const Sub_subCategory = (props) => {
         }, [])
     );
     let iconName;
-    
+
     return (
         <SafeAreaView style={{ backgroundColor: '#fff', flex: 1 }}>
 
@@ -135,27 +136,31 @@ export const Sub_subCategory = (props) => {
                 <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', width: responsiveWidth(100) }}>
 
                     {sub_subCatData?.map((item, index) => {
-                        console.log(item)
+                        console.log('hammad',item.sub_sub_category_name)
 
                         return (
-                            <View style={{ margin: 10 }} key={index}>
-                                <View style={{
-                                    backgroundColor: 'white', width: responsiveWidth(16), height: responsiveHeight(8), borderRadius: 50, shadowColor: "#000",
-                                    shadowOffset: {
-                                        width: 0,
-                                        height: 2,
-                                    },
-                                    shadowOpacity: 0.25,
-                                    shadowRadius: 3.84,
-                                    padding: 10,
-                                    elevation: 5,
-                                    alignSelf: 'center'
-                                }}>
+                            <View>{
+                                item.response !== 'no data' ? (
+                                    <View style={{ margin: 10 }} key={index}>
+                                        <View style={{
+                                            backgroundColor: 'white', width: responsiveWidth(16), height: responsiveHeight(8), borderRadius: 50, shadowColor: "#000",
+                                            shadowOffset: {
+                                                width: 0,
+                                                height: 2,
+                                            },
+                                            shadowOpacity: 0.25,
+                                            shadowRadius: 3.84,
+                                            padding: 10,
+                                            elevation: 5,
+                                            alignSelf: 'center'
+                                        }}>
 
-                                    <Icon style={{ alignSelf: 'center' }} name='cloud-question' color='black' size={40} />
-                                </View>
+                                            <Icon style={{ alignSelf: 'center' }} name='cloud-question' color='black' size={40} />
+                                        </View>
 
-                                <Text style={{ fontSize: responsiveFontSize(2), color: 'black', fontWeight: '600', textAlign: 'center' }}>{item.sub_sub_category_name || 'data not found'}</Text>
+                                        <Text style={{ fontSize: responsiveFontSize(2), color: 'black', fontWeight: '600', textAlign: 'center' }}>{item.sub_sub_category_name || 'data not found'}</Text>
+                                    </View>
+                                ) : null}
                             </View>
                         )
                     })}
@@ -171,30 +176,21 @@ export const Sub_subCategory = (props) => {
                                         <View style={{
                                             backgroundColor: '#fff',
                                             width: responsiveWidth(46),
-                                            height: responsiveHeight(30),
+                                            height: responsiveHeight(46),
                                             margin: 7,
                                             borderRadius: 10,
-                                            shadowColor: "#000",
-                                            shadowOffset: {
-                                                width: 0,
-                                                height: 2,
-                                            },
-                                            shadowOpacity: 0.25,
-                                            shadowRadius: 3.84,
 
-                                            elevation: 5,
                                         }} >
                                             <ShimmerView style={{
                                                 width: responsiveWidth(46),
-                                                height: responsiveHeight(15),
+                                                height: responsiveHeight(35),
                                                 borderRadius: 10,
                                             }}>
                                                 <ShimmerView style={{ backgroundColor: '#9e9e9e', width: responsiveWidth(46), height: responsiveHeight(15), borderTopLeftRadius: 10, borderTopRightRadius: 10, opacity: .4 }}></ShimmerView>
                                             </ShimmerView>
-                                            <View style={{ padding: 10, height: responsiveHeight(15), flexDirection: 'column', justifyContent: 'space-between' }}>
+                                            <View style={{ padding: 10, height: responsiveHeight(10), flexDirection: 'column', justifyContent: 'space-between' }}>
                                                 <ShimmerView style={{ width: responsiveWidth(40), height: responsiveHeight(3), backgroundColor: '#9e9e9e', opacity: .4, borderRadius: 8 }}></ShimmerView>
                                                 <ShimmerView style={{ width: responsiveWidth(30), height: responsiveHeight(3), backgroundColor: '#9e9e9e', opacity: .4, borderRadius: 8 }}></ShimmerView>
-                                                <ShimmerView style={{ width: responsiveWidth(15), height: responsiveHeight(3), backgroundColor: '#9e9e9e', opacity: .4, borderRadius: 8 }}></ShimmerView>
 
                                             </View>
                                         </View>
@@ -206,42 +202,41 @@ export const Sub_subCategory = (props) => {
                         (
 
                             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', width: responsiveWidth(100) }}>
-                                {productData?.map((item, index) => {
+                                {productData && productData.map((item, index) => {
                                     return (
-                                        <View>
-                                            {item.price ? (
-                                                <TouchableOpacity activeOpacity={.8} onPress={() => navigation.navigate('productDetails', {
-                                                    image: item.image,
-                                                    product_name: item.product_name,
-                                                    details: item.description,
-                                                    price: item.price,
-                                                    weight: item.weight,
-                                                    brand: item.brand_name,
-                                                    unit: item.unit,
-                                                    product_id: item.product_id
+                                        <TouchableOpacity activeOpacity={.8} onPress={() => navigation.navigate('productDetails', {
+                                            image: item.image,
+                                            product_name: item.product_name,
+                                            details: item.description,
+                                            price: item.price,
+                                            weight: item.weight,
+                                            brand: item.brand_name,
+                                            unit: item.unit,
+                                            product_id: item.product_id
 
-                                                })}>
-                                                    <Animatable.View animation={'fadeInUpBig'} style={style.card} key={item.product_id}>
-                                                        <View style={style.cardView}>
+                                        })}>
+                                            <Animatable.View animation={'fadeInUpBig'} style={style.card} key={index}>
+                                                <View style={style.cardView}>
 
-                                                            <Image style={{ resizeMode: 'contain', width: responsiveWidth(46), height: responsiveHeight(15), borderTopLeftRadius: 10, borderTopRightRadius: 10 }} source={{ uri: item.image }} />
-                                                        </View>
-                                                        <View style={{ padding: 10, height: responsiveHeight(15), borderBottomLeftRadius: 10, borderBottomRightRadius: 10, flexDirection: 'column', justifyContent: 'space-between' }}>
+                                                    <Image style={{ resizeMode: 'contain', width: responsiveWidth(46), height: responsiveHeight(35), borderRadius: 10 }} source={{ uri: item.image }} />
+                                                </View>
+                                                <View style={{ padding: 10, height: responsiveHeight(11), borderBottomLeftRadius: 10, borderBottomRightRadius: 10, flexDirection: 'column', justifyContent: 'space-between' }}>
 
-                                                            <Text style={{ color: 'black', fontSize: responsiveFontSize(2), textAlign: 'center', fontWeight: '600' }}>{item.product_name} </Text>
-                                                            <Text style={{ color: 'black', fontSize: responsiveFontSize(2), textAlign: 'center' }}>{item.description} </Text>
+                                                    <Text style={{ color: 'black', fontSize: responsiveFontSize(2.1), textAlign: 'center', fontWeight: '500' }}>{item.product_name} </Text>
 
-                                                            <Text style={{ color: 'orange', fontSize: responsiveFontSize(2.5), textAlign: 'center' }}>{item.price}</Text>
-                                                        </View>
-                                                    </Animatable.View>
-                                                </TouchableOpacity>
-                                            ) : (<Text style={{ fontSize: responsiveFontSize(2), padding: 10, textAlign: 'center' }}>Data not found</Text>)}
 
-                                        </View>
+                                                    <Text style={{ color: 'orange', fontSize: responsiveFontSize(2.5), textAlign: 'center' }}>Rs.{item.price}</Text>
+                                                </View>
+                                            </Animatable.View>
+                                        </TouchableOpacity>
+
+
+
                                     )
                                 })}
 
                             </View>
+
 
                         )}
                 </View>
@@ -255,26 +250,18 @@ const style = StyleSheet.create({
     // -----------New Arrival Cards-------------
     card: {
 
-        backgroundColor: 'white',
+        backgroundColor: '#fff',
         width: responsiveWidth(46),
-        height: responsiveHeight(30),
+        height: responsiveHeight(46),
         margin: 7,
         borderRadius: 10,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
 
-        elevation: 5,
 
 
     },
     cardView: {
         width: responsiveWidth(46),
-        height: responsiveHeight(15),
+        height: responsiveHeight(35),
         borderRadius: 10,
         shadowColor: "#000",
         shadowOffset: {

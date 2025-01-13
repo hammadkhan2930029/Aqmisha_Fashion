@@ -1,12 +1,10 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 import { NavigationContainer } from '@react-navigation/native';
 import Main_main from './normal/main';
 import SplashScreen from './normal/splash';
 import Register from './bottom/register';
 import LogIn from './bottom/login';
-
 import Profile from './bottom/profile';
 import Checkout from './normal/checkOut';
 import ForgetPassword from './bottom/forgetPassword';
@@ -43,8 +41,6 @@ const StackNavigator = () => {
                     <Stack.Screen name="orderPlaceDetails" component={Orderplace_details} options={{ headerShown: false }} />
                     <Stack.Screen name="profile_details" component={Profile_details} options={{ headerShown: false }} />
                     <Stack.Screen name="change_password" component={Change_password} options={{ headerShown: false }} />
-
-
 
                 </Stack.Navigator>
             </NavigationContainer>

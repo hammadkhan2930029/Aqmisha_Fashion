@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, StyleSheet, SafeAreaView, ScrollView, TouchableOpacity, Image, Linking } from "react-native";
-
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import {
     responsiveHeight,
@@ -48,7 +48,7 @@ const CustomDrawer = (props) => {
     const [CatData, setCatData] = useState([])
     const category = async () => {
         try {
-            const response = await fetch("https://demo.cogentecommerce.com/api/view_data_api.php?view=category")
+            const response = await fetch("https://aqmishafashion.online/api/view_data_api.php?view=category")
             const res = await response.json()
                 .then((res) => {
 
@@ -87,17 +87,17 @@ const CustomDrawer = (props) => {
                                         <View key={index}>
                                             {item.response == 'failed' ? (
                                                 <View style={{
-                                                    backgroundColor: '#31708f', shadowColor: "#000",
+                                                    backgroundColor: ' #d4d4d4', shadowColor: "#000",
                                                     shadowOffset: {
                                                         width: 0,
                                                         height: 2,
                                                     },
                                                     shadowOpacity: 0.25,
                                                     shadowRadius: 3.84,
-                                                    padding: 5,
                                                     elevation: 5,
+                                                    padding: 5,
                                                 }}>
-                                                    <View onPress={() => Linking.openURL('https://foreeshop.com.pk/')} style={{
+                                                    <View onPress={() => Linking.openURL('https://aqmishafashion.online/')} style={{
                                                         width: responsiveWidth(20), height: responsiveHeight(10), borderRadius: 100, backgroundColor: 'white', shadowColor: "#000",
                                                         shadowOffset: {
                                                             width: 0,
@@ -108,14 +108,14 @@ const CustomDrawer = (props) => {
                                                         margin: 10,
                                                         elevation: 5,
                                                     }}>
-                                                        <Image style={{ width: responsiveWidth(20), height: responsiveHeight(10), borderRadius: 100 }} source={require('../../NewAssets/foreeshop.png')} />
+                                                        <Image style={{ width: responsiveWidth(20), height: responsiveHeight(10) }} source={require('../../NewAssets/aqmisha.png')} />
 
                                                     </View>
                                                 </View>
                                             ) : (
 
                                                 <View style={{
-                                                    backgroundColor: '#31708f', shadowColor: "#000",
+                                                    backgroundColor: '#000', shadowColor: "#000",
                                                     shadowOffset: {
                                                         width: 0,
                                                         height: 2,
@@ -159,7 +159,7 @@ const CustomDrawer = (props) => {
                             </View>
                         ) : (
                             <View style={{
-                                backgroundColor: '#31708f', shadowColor: "#000",
+                                backgroundColor: '#d4d4d4', shadowColor: "#000",
                                 shadowOffset: {
                                     width: 0,
                                     height: 2,
@@ -169,7 +169,7 @@ const CustomDrawer = (props) => {
                                 padding: 5,
                                 elevation: 5,
                             }}>
-                                <TouchableOpacity onPress={() => Linking.openURL('https://foreeshop.com.pk/')}>
+                                <TouchableOpacity onPress={() => Linking.openURL('https://aqmishafashion.online/')}>
 
                                     <View style={{
                                         width: responsiveWidth(20), height: responsiveHeight(10), borderRadius: 100, backgroundColor: 'white', shadowColor: "#000",
@@ -182,7 +182,7 @@ const CustomDrawer = (props) => {
                                         margin: 10,
                                         elevation: 5,
                                     }}>
-                                        <Image style={{ width: responsiveWidth(20), height: responsiveHeight(10), borderRadius: 100 }} source={require('../../NewAssets/foreeshop.png')} />
+                                        <Image style={{ width: responsiveWidth(20), height: responsiveHeight(10) }} source={require('../../NewAssets/aqmisha.png')} />
 
                                     </View>
                                 </TouchableOpacity>
@@ -196,8 +196,11 @@ const CustomDrawer = (props) => {
                     <View >
                         <TouchableOpacity activeOpacity={.6}
                             onPress={() => navigation.navigate('deals')}
-                            style={{ paddingTop: 15, borderBottomColor: '#C5C5C5', borderBottomWidth: .8,flexDirection:'row',alignItems:'center' }}
+                            style={{ paddingTop: 15, borderBottomColor: '#C5C5C5', borderBottomWidth: .8, flexDirection: 'row', alignItems: 'center' }}
                         >
+                            <View>
+                                <Image style={{ resizeMode: 'contain', width: responsiveWidth(8) }} source={require('../../NewAssets/apperal/Forward.png')} />
+                            </View>
 
                             <Animatable.View animation={'fadeInDown'} >
 
@@ -208,6 +211,23 @@ const CustomDrawer = (props) => {
                                 <Image style={{ resizeMode: 'contain', width: responsiveWidth(10), height: responsiveHeight(5) }} source={require('../../NewAssets/deal.png')} />
                             </View>
                         </TouchableOpacity>
+                        <TouchableOpacity activeOpacity={.6}
+                            onPress={() => navigation.navigate('shop')}
+                            style={{ paddingTop: 15, borderBottomColor: '#C5C5C5', borderBottomWidth: .8, flexDirection: 'row', alignItems: 'center' }}
+                        >
+
+                            <View>
+                                <Image style={{ resizeMode: 'contain', width: responsiveWidth(8) }} source={require('../../NewAssets/apperal/Forward.png')} />
+                            </View>
+                            <Animatable.View animation={'fadeInDown'} >
+
+                                <Text style={{ color: 'black', fontSize: responsiveFontSize(2.5), padding: 5 }} >Shop</Text>
+
+                            </Animatable.View>
+                            <View>
+                                <Image style={{ resizeMode: 'contain', width: responsiveWidth(10), height: responsiveHeight(5) }} source={require('../../NewAssets/shop.png')} />
+                            </View>
+                        </TouchableOpacity>
                     </View>
                     <View>
                         <FlatList
@@ -216,12 +236,18 @@ const CustomDrawer = (props) => {
                             renderItem={({ item }) => (
                                 <View style={{ paddingTop: 15, borderBottomColor: '#C5C5C5', borderBottomWidth: .8 }}>
                                     <TouchableOpacity activeOpacity={.6} onPress={() => navigation.navigate('sub_category', { 'category_id': item.category_id, "category_name": item.category_name })}>
+                                        <View style={{flexDirection:'row',alignItems:'center'}}>
 
-                                        <Animatable.View animation={'fadeInDown'} >
+                                            <View>
+                                                <Image style={{ resizeMode: 'contain', width: responsiveWidth(8) }} source={require('../../NewAssets/apperal/Forward.png')} />
+                                            </View>
+                                            <Animatable.View animation={'fadeInDown'} >
 
-                                            <Text style={{ color: 'black', fontSize: responsiveFontSize(2.5), padding: 5 }} >{item.category_name}</Text>
+                                                <Text style={{ color: 'black', fontSize: responsiveFontSize(2.5), padding: 5 }} >{item.category_name}</Text>
 
-                                        </Animatable.View>
+                                            </Animatable.View>
+                                        </View>
+
                                     </TouchableOpacity>
 
                                 </View>
@@ -243,17 +269,17 @@ const CustomDrawer = (props) => {
                         </TouchableOpacity>
                     </View>
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', padding: 10 }}>
-                        <TouchableOpacity onPress={() => Linking.openURL('https://www.facebook.com')}>
+                        <TouchableOpacity onPress={() => Linking.openURL('https://www.facebook.com/people/Aqmisha-The-Name-for-the-quality-fabrics/61552419902561/?mibextid=ZbWKwL')}>
                             <Icon name='facebook' size={30} color='#000' />
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => Linking.openURL('https://www.instagram.com')}>
+                        <TouchableOpacity onPress={() => Linking.openURL('https://www.instagram.com/aqmisha.bf/?utm_source=qr&igshid=MzNlNGNkZWQ4Mg%3D%3D')}>
                             <Icon name='instagram' size={30} color='#000' />
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => Linking.openURL('https://mail.google.com')}>
-                            <Icon name='gmail' size={30} color='#000' />
+                        <TouchableOpacity onPress={() => Linking.openURL('https://api.whatsapp.com/send/?phone=923203216788&text&type=phone_number&app_absent=0')}>
+                            <Icon name='whatsapp' size={30} color='#000' />
                         </TouchableOpacity>
                     </View>
-                    <Text style={{ color: '#C5C5C5', fontSize: responsiveFontSize(1.8), padding: 10, textAlign: 'center' }}>Copyrights © 2024 CogentDevs</Text>
+                    <Text style={{ color: '#C5C5C5', fontSize: responsiveFontSize(1.8), padding: 10, textAlign: 'center' }}>Copyrights © 2024</Text>
 
 
                 </View>

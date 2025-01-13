@@ -14,6 +14,8 @@ const Tab = createBottomTabNavigator();
 
 const Bottom = () => {
     const [user_id, setuser_id] = useState('');
+    const [user, setuser] = useState('');
+
     const [viewCartData, setViewCartData] = useState('');
 
 
@@ -32,8 +34,10 @@ const Bottom = () => {
                 let firstUserId = userDetails.length > 0 ? userDetails[0].user_id : null;
 
                 setuser_id(firstUserId);
+                setuser(firstUserId)
             } else {
-                setuser_id(randomNumber)
+                setuser_id('')
+                setuser(randomNumber)
             }
 
         } catch (e) {
@@ -48,7 +52,7 @@ const Bottom = () => {
     const getAddtocart = async () => {
 
         try {
-            const url = `https://demo.cogentecommerce.com/api/cart_api.php?cart=cart-products&user_id=${user_id}`;
+            const url = `https://aqmishafashion.online/api/cart_api.php?cart=cart-products&user_id=${user}`;
             const response = await fetch(url)
             const result = await response.json()
                 .then((result) => {
@@ -67,6 +71,8 @@ const Bottom = () => {
             console.log(error)
         }
     }
+    getAddtocart()
+
 
     useEffect(() => {
         getMyObject()
@@ -74,61 +80,19 @@ const Bottom = () => {
         getAddtocart()
 
 
-    }, [user_id])
+    }, [user])
     console.log('user id ', user_id)
+    console.log('user', user)
+
     console.log('lenght', viewCartData)
-    
+
     useFocusEffect(
         React.useCallback(() => {
-            //   getAddtocart()
+            getAddtocart()
             setViewCartData('')
         }, [])
     );
-    // const [user_id, setuser_id] = useState('');
-    // const [viewCartData, setViewCartData] = useState(0);
-    //    -----------------redux-------------------------
-    //  const randomNumber = useSelector(state => state.randomNumber.randomNumber);
 
-    //     const getMyObject = async () => {
-    //         try {
-    //             const jsonValue = await AsyncStorage.getItem('user_details');
-    //             if (jsonValue != null) {
-    //                 const userDetails = JSON.parse(jsonValue);
-    //                 let firstUserId = userDetails.length > 0 ? userDetails[0].user_id : null;
-    //                 setuser_id(firstUserId);
-    //             } else {
-    //                 setuser_id(randomNumber);
-    //             }
-    //         } catch (e) {
-    //             console.log('get object error' + e);
-    //         }
-    //     };
-
-    //     const getAddtocart = async () => {
-    //         if (user_id) {
-    //             try {
-    //                 const url = `https://demo.cogentecommerce.com/api/cart_api.php?cart=cart-products&user_id=${user_id}`;
-    //                 const response = await fetch(url);
-    //                 const result = await response.json();
-    //                 console.log(result)
-    //                 setViewCartData(result.cart_count);
-    //             } catch (error) {
-    //                 console.log(error);
-    //             }
-    //         }
-    //     };
-
-    //     useEffect(() => {
-    //         const initialize = async () => {
-    //             await getMyObject();
-    //         };
-    //         initialize();
-    //     }, []);
-
-    //     useEffect(() => {
-    //         getAddtocart();
-    //     }, [user_id]);
-    // console.log('cart lenght',viewCartData)
     return (
         <Tab.Navigator screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, size, color }) => {
@@ -166,6 +130,7 @@ const Bottom = () => {
             }
 
         })}
+         initialRouteName="Home"
         >
             <Tab.Screen name="Home" component={Home} options={{ headerShown: false }} />
             <Tab.Screen name="view_cart_details" component={View_Cart_details} options={{ headerShown: false, tabBarBadge: viewCartData > 0 ? viewCartData : null }} />

@@ -11,6 +11,8 @@ import * as Animatable from 'react-native-animatable';
 import NavbarTop from './navbar';
 import LinearGradient from "react-native-linear-gradient";
 import { createShimmerPlaceholder } from "react-native-shimmer-placeholder";
+import { useToast } from "react-native-toast-notifications";
+
 const ShimmerView = createShimmerPlaceholder(LinearGradient)
 const arry = [1, 1, 1, 1]
 
@@ -18,16 +20,20 @@ const arry = [1, 1, 1, 1]
 
 
 const Deals = () => {
+    const toast = useToast();
+
     const navigation = useNavigation();
     const [deal_data, setDeal_data] = useState();
     const [isloaded, setIsLoaded] = useState(true)
     const deals = async () => {
         try {
-            const url = `https://demo.cogentecommerce.com/api/view_data_api.php?view=deals`
+            const url = `https://aqmishafashion.online/api/view_data_api.php?view=deals`
             const response = await fetch(url)
             const result = await response.json()
                 .then((result) => {
-                    console.log('Deals', result)
+                    console.log('Deals', result.msg[0].response)
+                    
+                    
                     if (result.msg) {
 
                         setDeal_data(result.msg)
@@ -104,27 +110,34 @@ const Deals = () => {
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', width: responsiveWidth(100) }}>
                     {deal_data && deal_data.map((item, index) => {
                         return (
-                            <TouchableOpacity activeOpacity={.8} onPress={() => navigation.navigate("deals_detail", {
-                                deal_id: item.deal_id,
-                                deal_name: item.deal_name,
-                                image: item.image,
-                                price: item.price,
-                                weight: item.weight
-                            })}>
-                                <Animatable.View animation={'fadeInUpBig'} style={style.card} key={index}>
-                                    <View style={style.cardView}>
+                            <View>
+                                {item.response !== 'no data' ? (
+                                    <TouchableOpacity activeOpacity={.8} onPress={() => navigation.navigate("deals_detail", {
+                                        deal_id: item.deal_id,
+                                        deal_name: item.deal_name,
+                                        image: item.image,
+                                        price: item.price,
+                                        weight: item.weight
+                                    })}>
+                                        <Animatable.View animation={'fadeInUpBig'} style={style.card} key={index}>
+                                            <View style={style.cardView}>
 
-                                        <Image style={{ resizeMode: 'contain', width: responsiveWidth(46), height: responsiveHeight(15), borderTopLeftRadius: 10, borderTopRightRadius: 10 }} source={{ uri: item.image }} />
+                                                <Image style={{ resizeMode: 'contain', width: responsiveWidth(46), height: responsiveHeight(15), borderTopLeftRadius: 10, borderTopRightRadius: 10 }} source={{ uri: item.image }} />
+                                            </View>
+                                            <View style={{ padding: 10, height: responsiveHeight(12), borderBottomLeftRadius: 10, borderBottomRightRadius: 10, flexDirection: 'column', justifyContent: 'space-between' }}>
+
+                                                <Text style={{ color: 'black', fontSize: responsiveFontSize(2.2), textAlign: 'center', fontWeight: '500' }}>{item.deal_name} </Text>
+
+                                                <Text style={{ color: 'orange', fontSize: responsiveFontSize(2.5), textAlign: 'center' }}>Rs.{item.price}</Text>
+                                            </View>
+                                        </Animatable.View>
+                                    </TouchableOpacity>
+                                ) : (
+                                    <View style={{ width: responsiveWidth(100),}}>
+                                        <Text style={{ color: "#000", padding: 10,textAlign:'center' }}>Data Not available</Text>
                                     </View>
-                                    <View style={{ padding: 10, height: responsiveHeight(12), borderBottomLeftRadius: 10, borderBottomRightRadius: 10, flexDirection: 'column', justifyContent: 'space-between' }}>
-
-                                        <Text style={{ color: 'black', fontSize: responsiveFontSize(2.2), textAlign: 'center', fontWeight: '500' }}>{item.deal_name} </Text>
-
-                                        <Text style={{ color: 'orange', fontSize: responsiveFontSize(2.5), textAlign: 'center' }}>Rs.{item.price}</Text>
-                                    </View>
-                                </Animatable.View>
-                            </TouchableOpacity>
-
+                                )}
+                            </View>
 
 
                         )
