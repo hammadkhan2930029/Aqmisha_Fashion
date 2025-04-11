@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Image, Linking, ImageBackground, ScrollView, FlatList, } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+
 import { useNavigation } from '@react-navigation/native';
 import {
     responsiveHeight,
@@ -10,23 +9,19 @@ import {
     responsiveFontSize
 } from "react-native-responsive-dimensions";
 import NavbarTop from './navbar';
-import * as Animatable from 'react-native-animatable';
 import AnimatedLoader from 'react-native-animated-loader';
-import { useToast } from "react-native-toast-notifications";
 import LinearGradient from "react-native-linear-gradient";
 import { createShimmerPlaceholder } from "react-native-shimmer-placeholder";
-
-const ShimmerView = createShimmerPlaceholder(LinearGradient);
+import { baseUrl } from '../../Config/baseUrl';
 
 const About = () => {
 
     const navigation = useNavigation();
     const [data, setdata] = useState([])
     const [visible, setVisible] = useState(true)
-    // const [loader,setLoader]=useState(true)
     const about = async () => {
         try {
-            const url = `https://aqmishafashion.online/api/view_data_api.php?view=about`
+            const url = `${baseUrl}/api/view_data_api.php?view=about`
             const response = await fetch(url)
             const result = await response.json()
                 .then((result) => {
@@ -77,99 +72,11 @@ const About = () => {
                 <NavbarTop />
             </View>
             <ScrollView>
-                {/* <View style={{ alignSelf: 'center', width: responsiveWidth(95), marginTop: 10, marginBottom: 10 }}>
-                    {data.map((item, index) => {
-                        console.log('item', item);
-                        switch (item.sec_condition) {
-                            case "1": // Only Text
-                                return (
-                                    <Animatable.View animation={'fadeInDown'} key={index}>
-                                        <Text style={{ color: '#000', fontSize: responsiveFontSize(2.5), fontWeight: '700' }}>{item.desc_title}</Text>
-                                        <Text style={{ color: '#000', fontSize: responsiveFontSize(2), padding: 10 }}>{item.description}</Text>
-                                    </Animatable.View>
-                                );
-                            case "2": // Only Image
-                                return (
-                                    <View key={index}>
-                                        
-                                            <Animatable.Image animation={'fadeInDown'}
-                                                source={{ uri: item.image }}
-                                                style={{
-                                                    width: responsiveWidth(90), height: responsiveHeight(20), alignSelf: 'center', padding: 10, shadowColor: "#000",
-                                                    shadowOffset: {
-                                                        width: 0,
-                                                        height: 2,
-                                                    },
-                                                    shadowOpacity: 0.25,
-                                                    shadowRadius: 3.84,
-                                                    backgroundColor: '#fff',
-                                                    elevation: 5,
-                                                    borderRadius: 10
-                                                }}
-                                            />
-                                  
-                                    </View>
-                                );
-                            case "3": // Text - Image
-                                return (
-                                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: responsiveWidth(95), marginTop: 10 }} key={index}>
-                                        <Animatable.View animation={'fadeInLeft'} style={{ width: responsiveWidth(45), height: responsiveHeight(50), }}>
-
-                                            <Text style={{ color: '#000', fontSize: responsiveFontSize(2.5), fontWeight: '700' }}>{item.desc_title}</Text>
-                                            <Text style={{ color: '#000', fontSize: responsiveFontSize(1.5), padding: 5 }}>{item.description}</Text>
-                                        </Animatable.View>
-                                        <Animatable.Image animation={'fadeInRight'}
-                                            source={{ uri: item.image }}
-                                            style={{ width: responsiveWidth(50), resizeMode: 'contain', height: responsiveHeight(50), alignSelf: 'center' }}
-                                        />
-                                    </View>
-                                );
-                            case "4": // Image - Text
-                                return (
-                                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: responsiveWidth(95), marginTop: 10 }} key={index}>
-                                        <Animatable.Image animation={'fadeInLeft'}
-                                            source={{ uri: item.image }}
-                                            style={{ width: responsiveWidth(50), resizeMode: 'contain', height: responsiveHeight(50), alignSelf: 'center' }}
-                                        />
-                                        < Animatable.View animation={'fadeInRight'} style={{ width: responsiveWidth(45), height: responsiveHeight(50), }}>
-
-                                            <Text style={{ color: '#000', fontSize: responsiveFontSize(2.5), fontWeight: '700', }}>{item.desc_title}</Text>
-                                            <Text style={{ color: '#000', fontSize: responsiveFontSize(2), padding: 5 }}>{item.description}</Text>
-                                        </Animatable.View>
-                                    </View>
-                                );
-                            case "5": // Text - Text
-                                return (
-                                    <Animatable.View animation={'fadeInUpBig'} key={index}>
-                                        <Text style={{ color: '#000', fontSize: responsiveFontSize(2.5), fontWeight: '700', marginTop: 10 }}>{item.desc_title}</Text>
-                                        <Text style={{ color: '#000', fontSize: responsiveFontSize(2), padding: 10 }}>{item.description}</Text>
-                                        <Text style={{ color: '#000', fontSize: responsiveFontSize(2.5), fontWeight: '700', marginTop: 10 }}>{item.decs_title_2}</Text>
-                                        <Text style={{ color: '#000', fontSize: responsiveFontSize(2), padding: 10 }}>{item.description_2}</Text>
-                                    </Animatable.View>
-                                );
-                            case "6": // Image - Image
-                                return (
-                                    <View key={index}>
-                                        <Image
-                                            source={{ uri: item.image }}
-                                            style={{ width: responsiveWidth(90), height: responsiveHeight(20), alignSelf: 'center', marginTop: 10 }}
-                                        />
-                                        <Image
-                                            source={{ uri: item.image_2 }}
-                                            style={{ width: responsiveWidth(90), height: responsiveHeight(20), alignSelf: 'center', marginTop: 10 }}
-                                        />
-                                    </View>
-                                );
-                            default:
-                                return null;
-                        }
-                    })}
-                </View> */}
+                
                 <View style={{ width: responsiveWidth(95), alignSelf: 'center' }}>
 
                     <View>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            {/* <Icon name='eye' size={20} color='#000' /> */}
                             <Text style={{ fontSize: responsiveFontSize(2.5), color: '#000', fontWeight: '700', padding: 5 }}>Vision</Text>
                         </View>
                         <View>
@@ -180,7 +87,6 @@ const About = () => {
                     {/* ---------------------------------- */}
                     <View>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            {/* <Icon name='eye' size={20} color='#000' /> */}
                             <Text style={{ fontSize: responsiveFontSize(2.5), color: '#000', fontWeight: '700', padding: 5 }}>Mission</Text>
                         </View>
                         <View>
@@ -190,7 +96,6 @@ const About = () => {
                     {/* ---------------------------------- */}
                     <View>
                         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            {/* <Icon name='eye' size={20} color='#000' /> */}
                             <Text style={{ fontSize: responsiveFontSize(2.5), color: '#000', fontWeight: '700', padding: 5 }}> Quality Policy</Text>
                         </View>
                         <View>

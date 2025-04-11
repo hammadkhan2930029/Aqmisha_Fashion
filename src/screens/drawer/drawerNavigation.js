@@ -1,14 +1,11 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
-
 import CustomDrawer from './customDrawer';
-
 import NavbarTop from './navbar';
 import { Sub_category } from './sub_category';
 import { Sub_subCategory } from './sub_subCategorys';
 import Main_drawer from './main_drawer';
 import ProductDetails from './productDetail';
 import Search from './search';
-import Profile from '../bottom/profile';
 import About from './about';
 import Contact_us from './contact_us';
 import Deals from './deals';

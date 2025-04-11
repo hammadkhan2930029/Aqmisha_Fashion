@@ -11,7 +11,7 @@ import { Formik } from "formik";
 import { object, string, number, date, InferType, Yup } from 'yup';
 import { useToast } from "react-native-toast-notifications";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import { baseUrl } from "../../Config/baseUrl";
 // -------------------------------------------
 let loginValidation_schema = object({
 
@@ -41,8 +41,7 @@ const Change_password = () => {
     const navigation = useNavigation()
     const toast = useToast();
 
-    // const [showPassword, setShowpassword] = useState(true);
-    // const [showPassword2, setShowpassword2] = useState(true);
+   
     const [user, setuser] = useState()
 
     // ----------------------------------------------------------------------------
@@ -77,7 +76,7 @@ const Change_password = () => {
         formData.append('confirm_password', values.confirm_password);
 
 
-        const url = 'https://aqmishafashion.online/api/user_api.php?user=change_password';
+        const url = `${baseUrl}/api/user_api.php?user=change_password`;
         await fetch(url, {
             method: 'POST',
             headers: {

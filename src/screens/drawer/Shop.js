@@ -18,7 +18,7 @@ import { generateRandomNumber } from "../Redux/actions";
 import { ProductContext } from "../bottom/product";
 const ShimmerView = createShimmerPlaceholder(LinearGradient)
 const arry = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-
+import { baseUrl } from "../../Config/baseUrl";
 
 const Shop = ({ props }) => {
     const navigation = useNavigation();

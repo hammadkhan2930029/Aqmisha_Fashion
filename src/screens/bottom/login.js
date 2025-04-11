@@ -7,13 +7,12 @@ import {
     responsiveWidth,
     responsiveFontSize
 } from "react-native-responsive-dimensions";
-import { useDispatch, useSelector } from "react-redux";
-import { AddUser } from "../Redux/actions";
+
 import * as Animatable from 'react-native-animatable';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Formik } from "formik";
 import { object, string, number, date, InferType } from 'yup';
-import AnotherIcon from 'react-native-vector-icons/MaterialIcons';
+import { baseUrl } from "../../Config/baseUrl";
 import { useToast } from "react-native-toast-notifications";
 import AnimatedLoader from 'react-native-animated-loader';
 
@@ -102,7 +101,7 @@ const LogIn = () => {
         setvisible(true)
         try {
 
-            const url = `https://aqmishafashion.online/api/user_api.php?user=login&email=${values.email}&password=${values.password}`
+            const url = `${baseUrl}/api/user_api.php?user=login&email=${values.email}&password=${values.password}`
             const respons = await fetch(url)
             let result = await respons.json()
                 .then((result) => {
@@ -166,7 +165,6 @@ const LogIn = () => {
            
 
 
-            {/* <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}> */}
                 <ScrollView>
 
                 <Formik

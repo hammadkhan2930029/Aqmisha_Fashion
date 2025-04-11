@@ -9,7 +9,7 @@ import {
 import NavbarTop from "./navbar";
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import * as Animatable from 'react-native-animatable';
-
+import { baseUrl } from "../../Config/baseUrl";
 
 const Search = () => {
 
@@ -19,7 +19,7 @@ const Search = () => {
     const searchUser = async (text) => {
         console.log(text);
         try {
-            const url = `https://aqmishafashion.online/api/view_data_api.php?view=product-search&key_word=${text}`;
+            const url = `${baseUrl}/api/view_data_api.php?view=product-search&key_word=${text}`;
             let response = await fetch(url);
 
             if (!response.ok) {

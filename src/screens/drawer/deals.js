@@ -12,7 +12,7 @@ import NavbarTop from './navbar';
 import LinearGradient from "react-native-linear-gradient";
 import { createShimmerPlaceholder } from "react-native-shimmer-placeholder";
 import { useToast } from "react-native-toast-notifications";
-
+import { baseUrl } from '../../Config/baseUrl';
 const ShimmerView = createShimmerPlaceholder(LinearGradient)
 const arry = [1, 1, 1, 1]
 
@@ -27,7 +27,7 @@ const Deals = () => {
     const [isloaded, setIsLoaded] = useState(true)
     const deals = async () => {
         try {
-            const url = `https://aqmishafashion.online/api/view_data_api.php?view=deals`
+            const url = `${baseUrl}/api/view_data_api.php?view=deals`
             const response = await fetch(url)
             const result = await response.json()
                 .then((result) => {

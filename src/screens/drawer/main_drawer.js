@@ -1,7 +1,5 @@
 import React from "react";
 import { View } from "react-native";
-
-import MyDrawer from "../drawer/drawerNavigation";
 import Bottom from "../bottom/bottom_navigation";
 
 

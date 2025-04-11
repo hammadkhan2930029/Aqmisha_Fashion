@@ -8,10 +8,9 @@ import {
     responsiveFontSize
 } from "react-native-responsive-dimensions";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import AnotherIcon from 'react-native-vector-icons/MaterialIcons';
 import * as Animatable from 'react-native-animatable';
 import AnimatedLoader from 'react-native-animated-loader';
-
+import { baseUrl } from '../../Config/baseUrl';
 
 const Orderplace_details = (props) => {
     const navigation = useNavigation();
@@ -51,7 +50,7 @@ const Orderplace_details = (props) => {
 
     const view_order = async () => {
         try {
-            let url = `https://aqmishafashion.online/api/order_api.php?order=view-orders&user_id=${user_id}`
+            let url = `${baseUrl}/api/order_api.php?order=view-orders&user_id=${user_id}`
             const respons = await fetch(url)
             const result = await respons.json()
                 .then((result) => {
@@ -83,7 +82,7 @@ const Orderplace_details = (props) => {
         setVisible(true)
 
         try {
-            let url = `https://aqmishafashion.online/api/order_api.php?order=view-order-detail&order_id=${order_id}`
+            let url = `${baseUrl}/api/order_api.php?order=view-order-detail&order_id=${order_id}`
             const respons = await fetch(url)
             const result = await respons.json()
                 .then((result) => {

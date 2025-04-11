@@ -3,17 +3,14 @@ import { View, Text, TouchableOpacity, SafeAreaView, TextInput, Image, ScrollVie
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import NavbarTop from "./navbar";
 import {
-    responsiveHeight,
     responsiveWidth,
     responsiveFontSize
 } from "react-native-responsive-dimensions";
 import { Formik, Form, Field } from 'formik';
-import { object, string, number, date, InferType, Yup } from 'yup';
 import * as Animatable from 'react-native-animatable';
 import { useToast } from "react-native-toast-notifications";
-import AnimatedLoader from 'react-native-animated-loader';
 import { useNavigation } from "@react-navigation/native";
-
+import { baseUrl } from "../../Config/baseUrl";
 
 const Contact_us = () => {
     const navigation = useNavigation();
@@ -26,7 +23,7 @@ const Contact_us = () => {
         formData.append("message", value.message);
 
         try {
-            const url = `https://aqmishafashion.online/api/contact_mail_api.php?contact=post`
+            const url = `${baseUrl}/api/contact_mail_api.php?contact=post`
             const response = await fetch(url, {
                 method: 'post',
                 headers: {

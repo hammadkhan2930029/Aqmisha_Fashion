@@ -10,8 +10,8 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { FlatList } from "react-native-gesture-handler";
 import * as Animatable from 'react-native-animatable';
-
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { baseUrl } from "../../Config/baseUrl";
 
 
 
@@ -43,12 +43,11 @@ const CustomDrawer = (props) => {
 
     }, []);
 
-    // console.log("user", user)
     // ------------------------category-------------
     const [CatData, setCatData] = useState([])
     const category = async () => {
         try {
-            const response = await fetch("https://aqmishafashion.online/api/view_data_api.php?view=category")
+            const response = await fetch(`${baseUrl}/api/view_data_api.php?view=category`)
             const res = await response.json()
                 .then((res) => {
 
@@ -82,7 +81,6 @@ const CustomDrawer = (props) => {
                             <View>
 
                                 {user?.map((item, index) => {
-                                    // console.log(item.response)
                                     return (
                                         <View key={index}>
                                             {item.response == 'failed' ? (
@@ -97,7 +95,7 @@ const CustomDrawer = (props) => {
                                                     elevation: 5,
                                                     padding: 5,
                                                 }}>
-                                                    <View onPress={() => Linking.openURL('https://aqmishafashion.online/')} style={{
+                                                    <View onPress={() => Linking.openURL(baseUrl)} style={{
                                                         width: responsiveWidth(20), height: responsiveHeight(10), borderRadius: 100, backgroundColor: 'white', shadowColor: "#000",
                                                         shadowOffset: {
                                                             width: 0,

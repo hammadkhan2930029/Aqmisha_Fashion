@@ -1,7 +1,7 @@
 
 
 import React, { useState, useEffect } from "react";
-import { Text, View, SafeAreaView, Image, StyleSheet, TouchableOpacity, TextInput, ScrollView,BackHandler } from 'react-native';
+import { Text, View, SafeAreaView, Image, StyleSheet, TouchableOpacity, TextInput, ScrollView, BackHandler } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 import { responsiveFontSize, responsiveHeight, responsiveWidth } from 'react-native-responsive-dimensions';
@@ -14,9 +14,9 @@ import { Formik } from "formik";
 import { object, string } from 'yup';
 import { useToast } from "react-native-toast-notifications";
 import AnimatedLoader from 'react-native-animated-loader';
-
+import { baseUrl } from "../../Config/baseUrl";
 let user_update_form = object({
-  
+
     email: string()
         .email()
         .required("Email is Required."),
@@ -66,7 +66,7 @@ const Edit_Profile = (props) => {
     const [data, setData] = useState([]);
     const getCountry = async () => {
         try {
-            const response = await fetch('https://aqmishafashion.online/api/view_data_api.php?view=country');
+            const response = await fetch(`${baseUrl}/api/view_data_api.php?view=country`);
             const result = await response.json();
             if (result && result.msg) {
                 setData(result.msg);
@@ -85,7 +85,7 @@ const Edit_Profile = (props) => {
     const [cityData, setCityData] = useState([]);
     const getCity = async (country_id) => {
         try {
-            const response = await fetch(`https://aqmishafashion.online/api/view_data_api.php?view=city&country_id=${country_id}`);
+            const response = await fetch(`${baseUrl}/api/view_data_api.php?view=city&country_id=${country_id}`);
             const result = await response.json();
             if (result && result.msg) {
                 setCityData(result.msg);
@@ -98,9 +98,9 @@ const Edit_Profile = (props) => {
     const [aysnc_data, setaysnc_data] = useState({
         firstName: '',
         lastName: '',
-        email:'',
-        mobile:'',
-        address:''
+        email: '',
+        mobile: '',
+        address: ''
     })
     const getUserDetails = async () => {
         try {
@@ -113,9 +113,9 @@ const Edit_Profile = (props) => {
                         setaysnc_data({
                             firstName: item.first_name,
                             lastName: item.last_name,
-                            email:item.email,
-                            mobile:item.mobile_no,
-                            address:item.address
+                            email: item.email,
+                            mobile: item.mobile_no,
+                            address: item.address
                         })
                         setUserImage(item.user_image);
                         setUser_Id(item.user_id);
@@ -164,7 +164,7 @@ const Edit_Profile = (props) => {
         formdata.append('user_image', pick_image);
 
         try {
-            const url = `https://aqmishafashion.online/api/user_api.php?user=update-profile`;
+            const url = `${baseUrl}/api/user_api.php?user=update-profile`;
             await fetch(url, {
                 method: "POST",
                 headers: {
@@ -207,7 +207,7 @@ const Edit_Profile = (props) => {
     };
 
     // --------------------------------------------------------------
-     useEffect(() => {
+    useEffect(() => {
         const backHandler = BackHandler.addEventListener(
             'hardwareBackPress',
             () => {
@@ -273,7 +273,7 @@ const Edit_Profile = (props) => {
 
                             )}
                         </TouchableOpacity>
-                        <View style={{ backgroundColor: '#f5f5f5', width: responsiveWidth(10), height: responsiveHeight(5), alignSelf: 'flex-end', marginTop: -50,  borderRadius: 50 }}>
+                        <View style={{ backgroundColor: '#fff', width: responsiveWidth(10), height: responsiveHeight(5), alignSelf: 'flex-end', marginTop: -50, borderRadius: 50, justifyContent: 'center', alignItems: 'center', elevation: 5 }}>
 
                             <Icon name="edit" color={'#000'} size={25} style={{ alignSelf: 'center' }} />
                         </View>
@@ -441,7 +441,7 @@ const Edit_Profile = (props) => {
 
 
                                 {/* --------------------------------------------------------------------------------- */}
-                                <TouchableOpacity  onPress={handleSubmit} style={{
+                                <TouchableOpacity onPress={handleSubmit} style={{
                                     width: responsiveWidth(90),
                                     backgroundColor: isValid ? '#000' : '#708090',
                                     padding: 15,
@@ -476,7 +476,9 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         padding: 2,
         width: responsiveWidth(10),
-        height: responsiveHeight(5)
+        height: responsiveHeight(5),
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 
     textinput: {

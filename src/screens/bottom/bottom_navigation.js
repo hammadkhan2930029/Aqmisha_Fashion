@@ -9,7 +9,7 @@ import LogIn from "./login";
 import { useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from "@react-navigation/native";
-
+import { baseUrl } from "../../Config/baseUrl";
 const Tab = createBottomTabNavigator();
 
 const Bottom = () => {
@@ -52,7 +52,7 @@ const Bottom = () => {
     const getAddtocart = async () => {
 
         try {
-            const url = `https://aqmishafashion.online/api/cart_api.php?cart=cart-products&user_id=${user}`;
+            const url = `${baseUrl}/api/cart_api.php?cart=cart-products&user_id=${user}`;
             const response = await fetch(url)
             const result = await response.json()
                 .then((result) => {

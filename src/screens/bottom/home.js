@@ -155,7 +155,7 @@ const Home = ({ props }) => {
 
                 {/* -----------------------------------Collections----------------------------------- */}
 
-                <View>
+                {/* <View>
                     <Text style={{ color: 'black', fontSize: responsiveFontSize(3.5), textAlign: 'center', marginTop: 40 }}>COLLECTIONS</Text>
                 </View>
 
@@ -165,7 +165,7 @@ const Home = ({ props }) => {
 
                 <View >
                     <Image style={{ resizeMode: 'stretch', width: responsiveWidth(100), alignSelf: 'center' }} source={require('../../assets/collection-one.png')} />
-                </View>
+                </View> */}
                 {/* -------------------------------On Sale------------------------------------- */}
                 <View style={{ marginTop: 20 }}>
                     <View >
@@ -346,7 +346,7 @@ const Home = ({ props }) => {
 
 
                 {/* ---------------Social Media------------- */}
-                <Text style={{ color: 'black', textAlign: 'center', fontSize: responsiveFontSize(3.2), padding: 10, letterSpacing: 5 }}>FOLLOW US</Text>
+                {/* <Text style={{ color: 'black', textAlign: 'center', fontSize: responsiveFontSize(3.2), padding: 10, letterSpacing: 5 }}>FOLLOW US</Text>
 
                 <TouchableOpacity style={{ alignSelf: 'center', margin: 10 }} onPress={() => Linking.openURL('https://www.instagram.com/aqmisha.bf/?utm_source=qr&igshid=MzNlNGNkZWQ4Mg%3D%3D')}>
                     <Icon name='instagram' size={45} color='#000' />
@@ -371,12 +371,12 @@ const Home = ({ props }) => {
                         <Image style={{ resizeMode: 'contain', width: responsiveWidth(40), margin: 5, borderRadius: 10 }} source={require('../../NewAssets/SocialFour.png')} />
 
                     </TouchableOpacity>
-                </View>
+                </View> */}
 
 
 
                 {/* ----------------Bottom---------------- */}
-                <View style={{ alignSelf: 'center' }}>
+                <View style={{ alignSelf: 'center',padding:10 }}>
                     <Image source={require('../../NewAssets/line.png')} />
                 </View>
                 <View style={{ alignSelf: 'center', margin: 10 }}>

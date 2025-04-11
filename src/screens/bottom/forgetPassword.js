@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Text, View, SafeAreaView, TextInput, TouchableOpacity, ActivityIndicator, KeyboardAvoidingView, StyleSheet } from 'react-native';
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useNavigation } from '@react-navigation/native';
-import axios from "axios";
+import { baseUrl } from "../../Config/baseUrl";
 
 import {
     responsiveHeight,
@@ -35,7 +35,7 @@ const ForgetPassword = () => {
        
 
 
-        const url = 'https://aqmishafashion.online/api/user_api.php?user=forgot_password'
+        const url = `${baseUrl}/api/user_api.php?user=forgot_password`;
         await fetch(url, {
             method: 'POST',
             headers: {

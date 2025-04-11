@@ -11,8 +11,8 @@ import * as Animatable from 'react-native-animatable';
 import { useSelector, useDispatch } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AnimatedLoader from 'react-native-animated-loader';
-import { generateRandomNumber } from "../Redux/actions";
 import { useToast } from "react-native-toast-notifications";
+import { baseUrl } from '../../Config/baseUrl';
 
 
 const ProductDetails = (props) => {
@@ -95,7 +95,7 @@ const ProductDetails = (props) => {
     // -----------------------------------------------------------------------------------------------------
     const getAddtocart = async () => {
         try {
-            const url = `https://aqmishafashion.online/api/cart_api.php?cart=cart-products&user_id=${user_id}`;
+            const url = `${baseUrl}/api/cart_api.php?cart=cart-products&user_id=${user_id}`;
             const response = await fetch(url);
             const result = await response.json();
 
@@ -124,7 +124,7 @@ const ProductDetails = (props) => {
         formData.append('size_id', size_ID);
 
         try {
-            const url = `https://aqmishafashion.online/api/cart_api.php?cart=add-to-cart`;
+            const url = `${baseUrl}/api/cart_api.php?cart=add-to-cart`;
             await fetch(url, {
                 method: 'POST',
                 headers: {
@@ -158,7 +158,7 @@ const ProductDetails = (props) => {
     const getProductColor = async (size) => {
         console.log('size', size)
         try {
-            const url = `https://aqmishafashion.online/api/view_data_api.php?view=product-colors&product_id=${product_id}&size_id=${size}`;
+            const url = `${baseUrl}/api/view_data_api.php?view=product-colors&product_id=${product_id}&size_id=${size}`;
             const response = await fetch(url);
             const result = await response.json();
 
@@ -183,7 +183,7 @@ const ProductDetails = (props) => {
     // ------------------------------------------------------------------------------------------------
     const get_product_size = async () => {
         try {
-            const url = `https://aqmishafashion.online/api/view_data_api.php?view=product-sizes&product_id=${product_id}`;
+            const url = `${baseUrl}/api/view_data_api.php?view=product-sizes&product_id=${product_id}`;
             const response = await fetch(url);
             const result = await response.json();
 
@@ -218,7 +218,7 @@ const ProductDetails = (props) => {
     // ------------------------------------------------------------------------------------------------------
     const stock_price = async () => {
         try {
-            const url = `https://aqmishafashion.online/api/view_data_api.php?view=product-stock-price&product_id=${product_id}&color_id=${colorID}&size_id=${size_ID}`;
+            const url = `${baseUrl}/api/view_data_api.php?view=product-stock-price&product_id=${product_id}&color_id=${colorID}&size_id=${size_ID}`;
             const response = await fetch(url);
             const result = await response.json();
 
@@ -246,7 +246,6 @@ const ProductDetails = (props) => {
             stock_price();
         }
 
-        // Dosra case: Jab colorID ya size_ID change ho jaye aur 0 se alag ho jaye
         if (product_id && (colorID !== 0 || size_ID !== 0)) {
             stock_price();
         }

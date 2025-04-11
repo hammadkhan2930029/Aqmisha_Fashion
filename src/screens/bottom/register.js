@@ -15,7 +15,7 @@ import { object, string, number, date, InferType, Yup } from 'yup';
 import * as Animatable from 'react-native-animatable';
 import { useToast } from "react-native-toast-notifications";
 import AnimatedLoader from 'react-native-animated-loader';
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { baseUrl } from "../../Config/baseUrl";
 
 
 
@@ -65,12 +65,24 @@ const Register = ({ props }) => {
             },
         }
         await launchImageLibrary(options, respons => {
-            setUser_Image({
-                uri: respons.assets[0].uri,
-                name: respons.assets[0].fileName,
-                filename: respons.assets[0].fileName,
-                type: respons.assets[0].type
-            })
+            if (respons.didCancel) {
+                console.log('user cancelled image picker');
+                return;
+            }
+            if (respons.errorCode) {
+                console.log("image picker error", respons.errorMessage);
+                return
+            }
+            if (respons.assets && respons.assets.length > 0) {
+                const assets = respons.assets[0];
+                setUser_Image({
+                    uri: assets.uri,
+                    name: assets.fileName,
+                    filename: assets.fileName,
+                    type: assets.type
+                })
+            }
+
 
         })
     }
@@ -86,7 +98,7 @@ const Register = ({ props }) => {
 
         try {
 
-            const url = 'https://aqmishafashion.online/api/view_data_api.php?view=country';
+            const url = `${baseUrl}/api/view_data_api.php?view=country`;
             const countryApirespons = await fetch(url)
             const result = await countryApirespons.json()
                 .then((result) => {
@@ -110,7 +122,7 @@ const Register = ({ props }) => {
 
     const getCity = async (country_id) => {
 
-        const url = `https://aqmishafashion.online/api/view_data_api.php?view=city&country_id=${country_id}`;
+        const url = `${baseUrl}/api/view_data_api.php?view=city&country_id=${country_id}`;
         let cityApirespons = await fetch(url);
         cityApirespons = await cityApirespons.json();
         console.log(cityApirespons.msg);
@@ -142,7 +154,7 @@ const Register = ({ props }) => {
             formData.append('address', values.address);
 
 
-            const url = 'https://aqmishafashion.online/api/user_api.php?user=register'
+            const url = `${baseUrl}/api/user_api.php?user=register`;
             await fetch(url, {
                 method: 'POST',
                 headers: {

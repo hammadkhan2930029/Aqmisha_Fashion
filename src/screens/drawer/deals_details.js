@@ -11,9 +11,8 @@ import * as Animatable from 'react-native-animatable';
 import { useSelector, useDispatch } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AnimatedLoader from 'react-native-animated-loader';
-import { generateRandomNumber } from "../Redux/actions";
 import { useToast } from "react-native-toast-notifications";
-
+import { baseUrl } from '../../Config/baseUrl';
 
 const Deals_detail = (props) => {
 
@@ -56,7 +55,7 @@ const Deals_detail = (props) => {
     // -----------------------------------------------------------------------------------------------------
     const getAddtocart = async () => {
         try {
-            const url = `https://aqmishafashion.online/api/cart_api.php?cart=cart-products&user_id=${user_id}`;
+            const url = `${baseUrl}/api/cart_api.php?cart=cart-products&user_id=${user_id}`;
             const response = await fetch(url);
             const result = await response.json();
 
@@ -91,7 +90,7 @@ const Deals_detail = (props) => {
 
 
         try {
-            const url = `https://aqmishafashion.online/api/cart_api.php?cart=add-to-cart-deal`;
+            const url = `${baseUrl}/api/cart_api.php?cart=add-to-cart-deal`;
             await fetch(url, {
                 method: 'POST',
                 headers: {

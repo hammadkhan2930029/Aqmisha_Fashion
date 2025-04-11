@@ -25,7 +25,7 @@ const Profile_details = (props) => {
         const backHandler = BackHandler.addEventListener(
             'hardwareBackPress',
             () => {
-                navigation.navigate('main');
+                navigation.navigate('profile');
                 return true;
             }
         );
@@ -55,7 +55,6 @@ const Profile_details = (props) => {
 
     }, []);
 
-    // console.log("user", user)
 
 
 
@@ -102,9 +101,9 @@ const Profile_details = (props) => {
                 padding: 5,
                 elevation: 5,
             }}>
-                <TouchableOpacity activeOpacity={.5} onPress={() => navigation.navigate('main')}>
+                <TouchableOpacity activeOpacity={.5} onPress={() => navigation.navigate('profile')}>
                     <View style={styles.icon}>
-                        <AnotherIcon name='keyboard-arrow-left' size={30} color='#000' />
+                        <AnotherIcon name='keyboard-arrow-left' size={30} color='#000' style={styles.arrowback}/>
                     </View>
                 </TouchableOpacity>
 
@@ -208,6 +207,8 @@ const Profile_details = (props) => {
 };
 const styles = StyleSheet.create({
     icon: {
+        justifyContent:'center',
+        alignItems:'center',
         backgroundColor: '#fff',
         shadowColor: "#000",
         shadowOffset: {

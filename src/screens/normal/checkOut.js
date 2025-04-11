@@ -11,35 +11,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as Animatable from 'react-native-animatable';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Formik, Form, Field } from 'formik';
-import { object, string, number, date, InferType, Yup } from 'yup';
 import LinearGradient from "react-native-linear-gradient";
 import { createShimmerPlaceholder } from "react-native-shimmer-placeholder";
 import AnimatedLoader from 'react-native-animated-loader';
 import { useToast } from "react-native-toast-notifications";
-
-import { RemoveItems } from '../Redux/actions';
+import { baseUrl } from '../../Config/baseUrl';
 const ShimmerView = createShimmerPlaceholder(LinearGradient)
 const arry = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-
-// let checkout_form = object({
-//     first_name: string()
-//         .required("First Name is Required.")
-//         .min(1, "First Name is Too Short."),
-//     last_name: string()
-//         .required("Last Name is Required.")
-//         .min(1, "Last Name is Too Short."),
-//     email: string()
-//         .email('Please enter valid email')
-//         .required('email in requird'),
-
-
-//     address: string()
-//         .required('Address must Requird'),
-//     mobile_no: string()
-//         .matches(/^(\+92|92|0)(\d{10})$/, 'Please enter a valid Pakistani mobile number')
-//         .required('Mobile number is required'),
-
-// });
 
 
 
@@ -117,7 +95,7 @@ const Checkout = (props) => {
     const getAddtocart = async () => {
         setIsloaded(true)
         try {
-            const url = `https://aqmishafashion.online/api/cart_api.php?cart=cart-products&user_id=${user_id}`;
+            const url = `${baseUrl}/api/cart_api.php?cart=cart-products&user_id=${user_id}`;
             let response = await fetch(url)
             let result = await response.json()
                 .then((result) => {
@@ -170,7 +148,7 @@ const Checkout = (props) => {
 
         try {
 
-            const url = 'https://aqmishafashion.online/api/view_data_api.php?view=country';
+            const url = `${baseUrl}/api/view_data_api.php?view=country`;
             const countryApirespons = await fetch(url)
             const result = await countryApirespons.json()
                 .then((result) => {
@@ -193,7 +171,7 @@ const Checkout = (props) => {
     const getCity = async (country_id) => {
         try {
 
-            const url = `https://aqmishafashion.online/api/view_data_api.php?view=city&country_id=${country_id}`;
+            const url = `${baseUrl}/api/view_data_api.php?view=city&country_id=${country_id}`;
             let cityApirespons = await fetch(url);
             const result = await cityApirespons.json()
                 .then((result) => {
@@ -211,7 +189,7 @@ const Checkout = (props) => {
 
     const shippingFee = async () => {
         try {
-            const url = `https://aqmishafashion.online/api/view_data_api.php?view=get-shipping-fee&country_id=${country.id}&city_id=${city.id}&total_weight=${grandWeight}&sub_total_amount=${sub_Total}`
+            const url = `${baseUrl}/api/view_data_api.php?view=get-shipping-fee&country_id=${country.id}&city_id=${city.id}&total_weight=${grandWeight}&sub_total_amount=${sub_Total}`
             const response = await fetch(url)
             const result = response.json()
                 .then((result) => {
@@ -257,7 +235,7 @@ const Checkout = (props) => {
         formData.append('GrandWeight', grandWeight)
 
         try {
-            const url = `https://aqmishafashion.online/api/order_api.php?order=checkout`
+            const url = `${baseUrl}/api/order_api.php?order=checkout`
             await fetch(url, {
                 method: 'post',
                 headers: {

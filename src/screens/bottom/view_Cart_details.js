@@ -13,7 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import LinearGradient from "react-native-linear-gradient";
 import { createShimmerPlaceholder } from "react-native-shimmer-placeholder";
 import { useToast } from "react-native-toast-notifications";
-
+import { baseUrl } from '../../Config/baseUrl';
 const ShimmerView = createShimmerPlaceholder(LinearGradient)
 
 
@@ -22,17 +22,7 @@ const ShimmerView = createShimmerPlaceholder(LinearGradient)
 const View_cart_details = (props) => {
     const navigation = useNavigation();
 
-    // useEffect(() => {
-    //     const backHandler = BackHandler.addEventListener(
-    //         'hardwareBackPress',
-    //         () => {
-    //             navigation.navigate('Home'); // Yahan 'Home' ki jagah apne home screen ka naam likhein
-    //             return true;
-    //         }
-    //     );
-
-    //     return () => backHandler.remove();
-    // }, [navigation]);
+    
 
     const toast = useToast();
     const [viewCartData, setViewCartData] = useState([]);
@@ -64,7 +54,7 @@ const View_cart_details = (props) => {
     // Fetching cart data------------------------------------------------------------
     const add_to_cart = async () => {
         try {
-            const url = `https://aqmishafashion.online/api/cart_api.php?cart=cart-products&user_id=${userId}`;
+            const url = `${baseUrl}/api/cart_api.php?cart=cart-products&user_id=${userId}`;
             const response = await fetch(url);
             const result = await response.json();
             if (result.msg) {
@@ -91,7 +81,7 @@ const View_cart_details = (props) => {
     // Deleting cart item----------------------------------------------------------------------
     const deleteCart = async (id) => {
         try {
-            const url = `https://aqmishafashion.online/api/cart_api.php?cart=delete-cart-item&id=${id}`;
+            const url = `${baseUrl}/api/cart_api.php?cart=delete-cart-item&id=${id}`;
             const response = await fetch(url, { method: 'delete' });
             if (response.ok) {
                 add_to_cart();
@@ -107,7 +97,7 @@ const View_cart_details = (props) => {
     // Incrementing quantity-----------------------------------------------------------------------
     const inc = async (cart_id) => {
         try {
-            const url = `https://aqmishafashion.online/api/cart_api.php?cart=add-quantity&id=${cart_id}`;
+            const url = `${baseUrl}/api/cart_api.php?cart=add-quantity&id=${cart_id}`;
             const response = await fetch(url);
             if (response.ok) {
                 add_to_cart();
@@ -123,7 +113,7 @@ const View_cart_details = (props) => {
     // Decrementing quantity--------------------------------------------------------------------------
     const dec = async (cart_id) => {
         try {
-            const url = `https://aqmishafashion.online/api/cart_api.php?cart=sub-quantity&id=${cart_id}`;
+            const url = `${baseUrl}/api/cart_api.php?cart=sub-quantity&id=${cart_id}`;
             const response = await fetch(url);
             if (response.ok) {
                 add_to_cart();
@@ -326,13 +316,13 @@ const View_cart_details = (props) => {
                         <View>
                             <Animatable.View animation={'fadeInLeft'}>
                                 {total ? (
-                                    <Text style={{ fontSize: responsiveFontSize(2.8), color: '#fff', fontWeight: '500' }}>{'Sub Total : ' + total}</Text>
+                                    <Text style={{ fontSize: responsiveFontSize(2.5), color: '#fff', fontWeight: '400' }}>{'Sub Total : ' + total}</Text>
                                 ) : null}
                             </Animatable.View>
                         </View>
                         <TouchableOpacity onPress={() => navigation.navigate('checkout')}>
 
-                            <View style={{ width: responsiveWidth(30), backgroundColor: '#fff', borderRadius: 10 }} ><Text style={{ fontSize: responsiveFontSize(2.3), padding: 5, color: '#000', textAlign: 'center' }}>CHECKOUT</Text></View>
+                            <View style={{ width: responsiveWidth(30), backgroundColor: '#fff', borderRadius: 10 }} ><Text style={{ fontSize: responsiveFontSize(2), padding: 5, color: '#000', textAlign: 'center' }}>CHECKOUT</Text></View>
                         </TouchableOpacity>
 
                     </Animatable.View>
